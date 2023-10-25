@@ -30,10 +30,79 @@ label {
   margin-top: 1rem;
   margin-bottom: 10px;
 }
-
+.modal-body{
+  display: flex;
+    justify-content: flex-end;
+}
+.react-calendar{
+  width: 300px;
+}
+.react-calendar__navigation__label{
+  width: 200px!important;
+}
+fieldset {
+  display: grid !important;
+  margin-inline-start: 2px !important;
+  margin-inline-end: 2px!important;
+  padding-block-start: 0.35em !important;
+  padding-inline-start: 0.75em !important;
+  padding-inline-end: 0.75em !important;
+  padding-block-end: 0.625em !important;
+  min-inline-size: min-content !important;
+  border-width: 2px !important;
+  border-style: groove !important;
+  border-color: rgb(192, 192, 192) !important;
+  border-image: initial !important;
+}
+.react-calendar button{
+  border: 1 solid silver!important ;
+}
+.modal-header {
+  display: flex;
+  align-items: baseline !important;}
+.modal-body button{
+  margin-left: 4px;
+}
 .address {
   margin-top: 10px;
 }
+/* fieldset.address > label {
+  display: flex;
+  flex-direction: column;
+} */
 .erreur{
   color:red;
 }
+form{
+  display: flex;
+  flex-direction: column;
+}
+.imgLogo{
+  width: 250px;
+  height: 200px;
+}
+h2{
+  color: #6e8511 !important;
+}
+.buttonSubmit{
+   width: 100px;
+   height: 35px;
+    margin-left: auto !important;;
+    margin-right: auto !important;;
+    margin-top: 20px!important;
+    background-color: #6e8511!important;
+    color: white !important;
+    border-radius: 10px!important;
+    border: none !important;
+}
+.modal-content {
+  margin-top: 400px!important; 
+}
+.modal-header {
+  border-bottom: none!important}
+  .modal-body button {
+    background-color: #6e8511!important;
+    border: none!important;
+    display: flex;
+    justify-content: space-evenly;
+  }
