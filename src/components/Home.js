@@ -1,27 +1,26 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Modal from 'react-bootstrap/Modal';
-import { Button } from 'react-bootstrap';
- import { states } from '../stateApi';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import { states } from '../stateApi';
 import '../index.css';
 import Calendar from 'react-calendar';
 import { format } from 'date-fns';
 import SelectComponent from './SelectComponent';
+import ModalEmployee from './ModalEmployee';
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
-   const navigate = useNavigate()
-  const [isFormCompleted, setFormCompled] = useState(false)
+  const navigate = useNavigate();
+  const [isFormCompleted, setFormCompleted] = useState(false); // Correction du nom de la variable
   const [showDateOfBirthCalendar, setShowDateOfBirthCalendar] = useState(false);
   const [showStartDateCalendar, setShowStartDateCalendar] = useState(false);
-  const departements=["Sales","Marketing","Engineering","Human Resources","Legal"]
-    const firstNameInput = useRef();
+  const departements = ["Sales", "Marketing", "Engineering", "Human Resources", "Legal"];
+  const firstNameInput = useRef();
   const lastNameInput = useRef();
   const dateOfBirthInput = useRef();
   const startDateInput = useRef();
   const departmentSelect = useRef();
-   const stateSelect = useRef();
+  const stateSelect = useRef();
   const streetInput = useRef();
   const cityInput = useRef();
   const zipCodeInput = useRef();
@@ -29,15 +28,22 @@ export default function Home() {
   const currentDate = new Date();
   currentDate.setFullYear(currentDate.getFullYear() - minAge);
   const [selectedDate, setSelectedDate] = useState(null);
-  const submitForm = (e) => {
-    e.preventDefault()
-    if (!firstNameInput.current.value || !lastNameInput.current.value || !dateOfBirthInput.current.value || !startDateInput.current.value || !streetInput.current.value || !cityInput.current.value || !zipCodeInput.current.value) {
-      setFormCompled(true)
-      return
+  const [employees, setEmployees] = useState([]); // Déclarer le tableau en dehors de la fonction
+
+  useEffect(() => {
+    // Récupérer les employés existants depuis localStorage au chargement de la page
+    const existingEmployees = JSON.parse(localStorage.getItem("NewEmployee"));
+    if (Array.isArray(existingEmployees)) {
+      setEmployees(existingEmployees);
     }
-   
-    setShowModal(true);
-    dateOfBirthInput.current.value = '';
+  }, []);
+    const submitForm = (e) => {
+    e.preventDefault();
+    if (!firstNameInput.current.value || !lastNameInput.current.value || !dateOfBirthInput.current.value || !startDateInput.current.value || !streetInput.current.value || !cityInput.current.value || !zipCodeInput.current.value) {
+      setFormCompleted(true); // Correction du nom de la fonction
+      return;
+    }
+    // dateOfBirthInput.current.value = '';
     startDateInput.current.value = format(currentDate, 'dd/MM/yyyy');
     const employee = {
       firstName: firstNameInput.current.value,
@@ -50,20 +56,32 @@ export default function Home() {
       stateValue: stateSelect.current.value,
       departmentValue: departmentSelect.current.value
     }
-    localStorage.setItem("NewEmployee", JSON.stringify(employee)) //enregister l'objet dans localStorage
-    // navigate("/employeesList")
+  // Ajouter le nouvel employé au tableau
+  const updatedEmployees = [...employees, employee];
+
+  // Enregistrer le tableau mis à jour dans localStorage
+  localStorage.setItem("NewEmployee", JSON.stringify(updatedEmployees));
+
+  // Mettre à jour l'état des employés
+  setEmployees(updatedEmployees);  
+
+  setShowModal(true);
 
   }
 
-
-  const allEmployee=()=>{
-    navigate("/employeesList")
+  const allEmployee = () => {
+    navigate("/employeesList");
   }
+
+  const closeModal = () => {
+    setShowModal(false);
+  }
+
   const toggleDateOfBirthCalendar = () => {
     setShowDateOfBirthCalendar(!showDateOfBirthCalendar);
     setShowStartDateCalendar(false); // Fermez le calendrier de la date de debut
   };
-  
+
   const toggleStartDateCalendar = () => {
     setShowStartDateCalendar(!showStartDateCalendar);
     setShowDateOfBirthCalendar(false); // Fermez le calendrier de la date de naissance
@@ -114,32 +132,25 @@ export default function Home() {
             <input ref={cityInput} id="city" type="text" />
 
             <label>State</label>
-            <SelectComponent options={states} name="state" id="state" optionSelected={stateSelect}  key={stateSelect.abbreviation}/>
+            <SelectComponent options={states} name="state" id="state" optionSelected={stateSelect} key={stateSelect.abbreviation} />
             <label>Zip Code</label>
             <input ref={zipCodeInput} id="zip-code" type="number" />
           </fieldset>
 
           <label>Department</label>
-         
+
           <SelectComponent options={departements} name="department" id="department" optionSelected={departmentSelect} />
           {isFormCompleted && !showModal ? (<div className="erreur">veuillez remplire le formulaire</div>) : null}
-          <button className="buttonSubmit"type="submit">Save</button>
+          <button className="buttonSubmit" type="submit">Save</button>
 
         </form>
-        {showModal && (
-          <Modal show={showModal} onHide={() => setShowModal(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>We have received your registration, you can now see the list of employees</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-        <Button onClick={allEmployee}>Voir les employees</Button>
-        <Button onClick={() => setShowModal(false)}>Close</Button>
-
-        </Modal.Body>
-
-          </Modal>
-        )}
-
+      
+        <ModalEmployee
+          close={closeModal}
+          redirection={allEmployee}
+          show={showModal}
+          erreur={!isFormCompleted}
+        />
       </div>
     </div>
   )
