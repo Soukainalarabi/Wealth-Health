@@ -1,19 +1,18 @@
 import React, { useRef, useState,useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import { states } from '../stateApi';
 import '../index.css';
 import Calendar from 'react-calendar';
 import { format } from 'date-fns';
 import SelectComponent from './SelectComponent';
 import ModalEmployee from './ModalEmployee';
+import { modalSlice } from '../reducers/modal.reducer';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Home() {
-  const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
-  const [isFormCompleted, setFormCompleted] = useState(false); // Correction du nom de la variable
-  const [showDateOfBirthCalendar, setShowDateOfBirthCalendar] = useState(false);
-  const [showStartDateCalendar, setShowStartDateCalendar] = useState(false);
+  const [showDateOfBirthCalendar, setShowDateOfBirthCalendar] = useState(false); //gestion de date
+  const [showStartDateCalendar, setShowStartDateCalendar] = useState(false);// gestion de date
+  const dispatch=useDispatch()
+  const modalState=useSelector((state)=>state.modal)
   const departements = ["Sales", "Marketing", "Engineering", "Human Resources", "Legal"];
   const firstNameInput = useRef();
   const lastNameInput = useRef();
@@ -28,7 +27,7 @@ export default function Home() {
   const currentDate = new Date();
   currentDate.setFullYear(currentDate.getFullYear() - minAge);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [employees, setEmployees] = useState([]); // Déclarer le tableau en dehors de la fonction
+  const [employees, setEmployees] = useState([]); // gerer la liste des employees
 
   useEffect(() => {
     // Récupérer les employés existants depuis localStorage au chargement de la page
@@ -40,10 +39,11 @@ export default function Home() {
     const submitForm = (e) => {
     e.preventDefault();
     if (!firstNameInput.current.value || !lastNameInput.current.value || !dateOfBirthInput.current.value || !startDateInput.current.value || !streetInput.current.value || !cityInput.current.value || !zipCodeInput.current.value) {
-      setFormCompleted(true); // Correction du nom de la fonction
+      dispatch(modalSlice.actions.formError(true));
+
+
       return;
     }
-    // dateOfBirthInput.current.value = '';
     startDateInput.current.value = format(currentDate, 'dd/MM/yyyy');
     const employee = {
       firstName: firstNameInput.current.value,
@@ -56,27 +56,12 @@ export default function Home() {
       stateValue: stateSelect.current.value,
       departmentValue: departmentSelect.current.value
     }
-  // Ajouter le nouvel employé au tableau
-  const updatedEmployees = [...employees, employee];
-
-  // Enregistrer le tableau mis à jour dans localStorage
-  localStorage.setItem("NewEmployee", JSON.stringify(updatedEmployees));
-
-  // Mettre à jour l'état des employés
-  setEmployees(updatedEmployees);  
-
-  setShowModal(true);
+  const updatedEmployees = [...employees, employee];  // Ajouter le nouvel employé au tableau
+  localStorage.setItem("NewEmployee", JSON.stringify(updatedEmployees));  // Enregistrer le tableau mis à jour dans localStorage
+  setEmployees(updatedEmployees);  // Mettre à jour l'état des employés
+  dispatch(modalSlice.actions.showModal(true));
 
   }
-
-  const allEmployee = () => {
-    navigate("/employeesList");
-  }
-
-  const closeModal = () => {
-    setShowModal(false);
-  }
-
   const toggleDateOfBirthCalendar = () => {
     setShowDateOfBirthCalendar(!showDateOfBirthCalendar);
     setShowStartDateCalendar(false); // Fermez le calendrier de la date de debut
@@ -140,17 +125,14 @@ export default function Home() {
           <label>Department</label>
 
           <SelectComponent options={departements} name="department" id="department" optionSelected={departmentSelect} />
-          {isFormCompleted && !showModal ? (<div className="erreur">veuillez remplire le formulaire</div>) : null}
+          {modalState && modalState.isFormIncomplete && !modalState.show ? (
+  <div className="erreur">veuillez remplir le formulaire</div>
+) : null}
           <button className="buttonSubmit" type="submit">Save</button>
 
         </form>
       
-        <ModalEmployee
-          close={closeModal}
-          redirection={allEmployee}
-          show={showModal}
-          erreur={!isFormCompleted}
-        />
+        <ModalEmployee/>
       </div>
     </div>
   )

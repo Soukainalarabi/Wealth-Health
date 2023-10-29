@@ -1,9 +1,21 @@
 import React from 'react';
 import closeButton from '../assets/cross.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { modalSlice } from '../reducers/modal.reducer';
 
-export default function ModalEmployee({ close, redirection,show,erreur}) {
+export default function ModalEmployee() {
+    const modalState=useSelector((state)=>state.modal)
+    const dispatch=useDispatch();
+    const navigate=useNavigate()
+    const close=()=>{
+        dispatch(modalSlice.actions.showModal(false));
+    }
+    const redirection=()=>{
+        navigate("/employeesList")
+    }
   return (
-    show && !erreur ?(
+     modalState && modalState.show  && !modalState.isFormIncomplete ?(
         <div className="centered">
 <div className='modal'>
       <div className="modal-header">
