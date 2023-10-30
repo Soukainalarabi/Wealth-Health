@@ -1,8 +1,11 @@
 import TableEmployee from "./TableEmployee";
+import {useContext} from "react"
+import { EmployeeContext } from "../utils/EmployeeContext";
 export default function EmployeesList() {
-  const employe = JSON.parse(localStorage.getItem("NewEmployee"));
+    const { employees } = useContext(EmployeeContext);
+console.log({ employees } )
 
   return (
-    <TableEmployee data={employe} />
+    <TableEmployee data={employees} />
   );
 }
