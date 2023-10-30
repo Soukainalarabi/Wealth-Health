@@ -1,19 +1,18 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { states } from '../stateApi';
 import '../index.css';
-import Calendar from 'react-calendar';
+// import Calendar from 'react-calendar';
 import { format } from 'date-fns';
 import SelectComponent from './SelectComponent';
 import ModalEmployee from './ModalEmployee';
-import { EmployeeContext } from '../utils/EmployeeContext';
+import Calendrier from './Calendrier'
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [isFormCompleted, setFormCompleted] = useState(false);
   const [showDateOfBirthCalendar, setShowDateOfBirthCalendar] = useState(false);
   const [showStartDateCalendar, setShowStartDateCalendar] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
   const departements = ["Sales", "Marketing", "Engineering", "Human Resources", "Legal"];
   const firstNameInput = useRef();
   const lastNameInput = useRef();
@@ -28,18 +27,26 @@ export default function Home() {
   const currentDate = new Date();
   currentDate.setFullYear(currentDate.getFullYear() - minAge);
   const navigate = useNavigate();
-  const { addEmployee, employees } = useContext(EmployeeContext); 
+  const [employees, setEmployees] = useState();
+  const [selectedStartDate, setSelectedStartDate] = useState(''); // État pour stocker la date sélectionnée
+
+
+  
+  //recuperer les employés depuis localStorage 
+  useEffect(() => {
+    const existingEmployees = JSON.parse(localStorage.getItem("NewEmployee"));
+    if (Array.isArray(existingEmployees)) {
+      setEmployees(existingEmployees);
+    }
+  }, []);
+
   const submitForm = (e) => {
     e.preventDefault();
     if (!firstNameInput.current.value || !lastNameInput.current.value || !dateOfBirthInput.current.value || !startDateInput.current.value || !streetInput.current.value || !cityInput.current.value || !zipCodeInput.current.value) {
       setFormCompleted(true);
-      setShowModal(false);
       return;
-    } else {
-      setFormCompleted(false);
-      setShowModal(true);
     }
-
+    setShowModal(true);
     startDateInput.current.value = format(currentDate, 'dd/MM/yyyy');
     const newEmployee = {
       firstName: firstNameInput.current.value,
@@ -53,11 +60,14 @@ export default function Home() {
       departmentValue: departmentSelect.current.value,
     };
 
-    if (Array.isArray(employees)) {      
-      setShowModal(true);
-      setFormCompleted(false);
-      addEmployee(newEmployee);
-    }
+    // Ajouter le nouvel employé au tableau
+    const updatedEmployees = [...employees, newEmployee];
+
+    // Enregistrer le tableau mis à jour dans localStorage
+    localStorage.setItem("NewEmployee", JSON.stringify(updatedEmployees));
+
+    // Mettre à jour l'état des employés
+    setEmployees(updatedEmployees);
   };
 
   const allEmployee = () => {
@@ -67,12 +77,15 @@ export default function Home() {
   const closeModal = () => {
     setShowModal(false);
   };
-
+  
   const toggleDateOfBirthCalendar = () => {
     setShowDateOfBirthCalendar(!showDateOfBirthCalendar);
     setShowStartDateCalendar(false);
   };
-
+  const handleButtonClick = (formattedDate) => {
+    // Mettez à jour l'état de la date de début sélectionnée
+    setSelectedStartDate(formattedDate);
+  };
   const toggleStartDateCalendar = () => {
     setShowStartDateCalendar(!showStartDateCalendar);
     setShowDateOfBirthCalendar(false);
@@ -89,28 +102,24 @@ export default function Home() {
           <label >Date of Birth</label>
           <input ref={dateOfBirthInput} id="date-of-birth" type="text" onClick={toggleDateOfBirthCalendar} />
           {showDateOfBirthCalendar && (
-            <Calendar
-              onChange={(date) => {
-                if (date <= currentDate) {
-                  setSelectedDate(date);
-                  dateOfBirthInput.current.value = format(date, 'dd/MM/yyyy');
-                }
-                toggleDateOfBirthCalendar();
-              }}
-              value={selectedDate}
-            />
+          <Calendrier
+          onButtonClick={(date) => {
+            // Gérez l'action de clic ici en utilisant la date
+            if (date <= currentDate) {
+              handleButtonClick(date);
+            }
+          }}
+        />
           )}
           <label>Start Date</label>
-          <input ref={startDateInput} id="start-date" type="text" onClick={toggleStartDateCalendar} />
+          <input ref={startDateInput}
+            id="start-date"
+            type="text"
+            value={selectedStartDate} // Affichez la date sélectionnée 
+            onClick={toggleStartDateCalendar}
+          />
           {showStartDateCalendar && (
-            <Calendar
-              onChange={(date) => {
-                setSelectedDate(date);
-                startDateInput.current.value = format(date, 'dd/MM/yyyy');
-                toggleStartDateCalendar();
-              }}
-              value={selectedDate}
-            />
+            <Calendrier onButtonClick={handleButtonClick} /> 
           )}
           <label >Adresse</label>
           <fieldset className="address">
