@@ -1,11 +1,10 @@
-import React, {  useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 
-export default function Calendrier({ onButtonClick })  {
-
+export default function Calendrier({ onButtonClick }) {
   const date = new Date();
-  const [mois, setMois] = useState(date.getMonth()); 
-  const [annee, setAnnee] = useState(date.getFullYear()); 
-
+  const [mois, setMois] = useState(date.getMonth());
+  const [annee, setAnnee] = useState(date.getFullYear());
 
   const jour = date.getDate();
   const moisNames = [
@@ -22,61 +21,70 @@ export default function Calendrier({ onButtonClick })  {
     'Novembre',
     'Décembre',
   ];
+  const firstDay = new Date(annee, mois, 1).getDay();
+  const lastDay = new Date(annee, mois + 1, 0).getDate();
+
   const joursDansMois = useMemo(() => {
-    const firstDay = new Date(annee, mois, 1).getDay();
-    const lastDay = new Date(annee, mois + 1, 0).getDate();
-    const jours = [];
-
-    for (let i = 0; i < firstDay; i++) {
-      jours.push(null); // Ajouter des espaces vides pour les jours du mois précédent
-    }
-
-    for (let i = 1; i <= lastDay; i++) {
-      jours.push(i); // Ajouter les jours du mois en cours
-    }
-
-    return jours;
-  }, [annee, mois]);
-
+    const joursPrecedents = Array.from({ length: firstDay }, () => null);
+    const joursCourants = Array.from({ length: lastDay }, (_, index) => index + 1);
+    return [...joursPrecedents, ...joursCourants];
+  }, [firstDay, lastDay]);
+  console.log(joursDansMois);
   const dateAujourdui = `${moisNames[mois]} ${annee}`;
+
   const handleMoisPrecedent = () => {
     const nouveauMois = (mois - 1 + 12) % 12;
     setMois(nouveauMois);
   };
+
   const handleAnneePrecedente = () => {
-    const nouvelleAnnee = (annee - 1)
+    const nouvelleAnnee = (annee - 1);
     setAnnee(nouvelleAnnee);
   };
+
   const handleAnneeSuivante = () => {
-    const nouvelleAnnee = (annee + 1)
+    const nouvelleAnnee = (annee + 1);
     setAnnee(nouvelleAnnee);
   };
+
   const handleMoisSuivant = () => {
     const nouveauMois = (mois + 1 + 12) % 12;
     setMois(nouveauMois);
+    console.log('hello', nouveauMois);
   };
+
   const handleButtonClick = (jourDuMois) => {
     const formattedDate = `${jourDuMois}/${mois + 1}/${annee}`;
-    onButtonClick(formattedDate); 
+    onButtonClick(formattedDate);
+    console.log('Date cliquée :', formattedDate);
+    console.log(jourDuMois);
   };
+
   return (
     <div className="container">
       <table className="cal_calendrier">
         <tbody id="cal_body">
           <tr>
             <th colSpan="1">
-            <button className="buttonMois" type="button" onClick={handleAnneePrecedente}>{"<<"}</button>
+              <button className="buttonMois" type="button" onClick={handleAnneePrecedente}>{'<<'}</button>
             </th>
-            <th colSpan="1"> 
-            <button className="buttonMois" type="button" onClick={handleMoisPrecedent}>{"<"}</button>
+            <th colSpan="1">
+              <button className="buttonMois" type="button" onClick={handleMoisPrecedent}>{'<'}</button>
             </th>
             <th colSpan="3">{dateAujourdui}</th>
-            <th colSpan="1">              
-            <button className="buttonMois" type="button" onClick={handleMoisSuivant}> {">"}</button>
+            <th colSpan="1">
+              <button className="buttonMois" type="button" onClick={handleMoisSuivant}>
+                {' '}
+                {'>'}
+              </button>
             </th>
-            <th colSpan="1">              <button className="buttonMois" type="button" onClick={handleAnneeSuivante}> {">>"}</button>
+            <th colSpan="1">
+              {' '}
+              <button className="buttonMois" type="button" onClick={handleAnneeSuivante}>
+                {' '}
+                {'>>'}
+              </button>
             </th>
-
 
           </tr>
           <tr className="cal_j_semaines">
@@ -88,25 +96,33 @@ export default function Calendrier({ onButtonClick })  {
             <th>Ven</th>
             <th>Sam</th>
           </tr>
-          {joursDansMois.map((jourDuMois, index) => (
-              <React.Fragment key={index}>
-
-              {/* Retourner à la ligne après chaque rangée de 7 jours  */}
-              {index % 7 === 0 && <tr />}
-              <td key={index}>
-                {jourDuMois !== null ? (
-                  <button
-                    className={jour === jourDuMois ? "jourNumber-actuel" : "jourNumber"}
-                    type="button" onClick={() => handleButtonClick(jourDuMois)}
-                  >
-                    {jourDuMois}
-                  </button>
-                ) : null}
-              </td>
-            </React.Fragment>
+          {/* //Définir la longueur du tab */}
+          {Array.from({ length: joursDansMois.length / 6 }, (row, rowIndex) => (
+            <tr className={`semaine${rowIndex}`} key={`semaine${rowIndex}`}>
+              {joursDansMois.slice(rowIndex * 7, (rowIndex + 1) * 7).map((jourDuMois, index) => (
+                <td key={`jour${jourDuMois !== null ? jourDuMois : `null${index}`}`} className={`jour${jourDuMois !== null ? jourDuMois : `null${index}`}`}>
+                  {jourDuMois !== null ? (
+                    <button
+                      className={jour === jourDuMois ? 'jourNumber-actuel' : 'jourNumber'}
+                      type="button"
+                      onClick={() => handleButtonClick(jourDuMois)}
+                    >
+                      {jourDuMois}
+                    </button>
+                  ) : null}
+                </td>
+              ))}
+            </tr>
           ))}
+
         </tbody>
       </table>
     </div>
   );
 }
+Calendrier.propTypes = {
+  onButtonClick: PropTypes.func,
+};
+Calendrier.defaultProps = {
+  onButtonClick: () => { },
+};

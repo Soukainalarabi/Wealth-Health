@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function TableEmployee({ data }) {
   if (!data || data.length === 0) {
@@ -11,7 +12,7 @@ export default function TableEmployee({ data }) {
     );
   }
 
-  const keys = Object.keys(data[0]);
+  const keysA = Object.keys(data[0]);
 
   return (
     <div id="employee-div" className="container">
@@ -20,16 +21,16 @@ export default function TableEmployee({ data }) {
         <table>
           <thead>
             <tr>
-              {keys.map((key) => (
+              {keysA.map((key) => (
                 <th key={key}>{key}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {data.map((employee, index) => (
-              <tr key={index}>
-                {keys.map((key) => (
-                  <td key={key}>{employee[key]}</td>
+            {data.map((employee, id) => (
+              <tr key={`employee-${id}`} className={`employee-${id}`}>
+                {keysA.map((val) => (
+                  <td key={`${val}employe-${id}`} className={`${val}employe-${id}`}>{employee[val]}</td>
                 ))}
               </tr>
             ))}
@@ -40,3 +41,9 @@ export default function TableEmployee({ data }) {
     </div>
   );
 }
+TableEmployee.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.number })),
+};
+TableEmployee.defaultProps = {
+  data: [],
+};

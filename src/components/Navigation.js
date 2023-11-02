@@ -1,10 +1,12 @@
-import logo from "../assets/logo.png"
-export default function Navigation(){
-    return(
-        <div className="container">
+import React from 'react';
+import logo from '../assets/logo.png';
 
-        <img className="imgLogo" src={logo} alt="logo du site" />    
+export default function Navigation() {
+  return (
+    <div className="container">
+
+      <img className="imgLogo" src={logo} alt="logo du site" />
 
     </div>
-    )
+  );
 }
