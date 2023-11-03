@@ -1,9 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
-import EmployeesList from './components/EmployeesList';
+import Home from './pages/Home';
+import EmployeesList from './pages/EmployeesList';
 import Navigation from './components/Navigation';
-import Calendrier from './components/Calendrier';
 
 export default function App() {
   return (
@@ -15,7 +14,6 @@ export default function App() {
           <Route path="/" element={<Home />} />
 
           <Route path="/employeesList" element={<EmployeesList />} />
-          <Route path="/calendrier" element={<Calendrier />} />
 
         </Routes>
 

@@ -3,15 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { states } from '../stateApi';
 import '../index.css';
-import SelectComponent from './SelectComponent';
-import ModalEmployee from './ModalEmployee';
-import Calendrier from './Calendrier';
+import SelectComponent from '../components/SelectComponent';
+import ModalEmployee from '../components/ModalEmployee';
+import Calendrier from '../components/Calendrier';
 
 export default function Home() {
+  const navigate = useNavigate();
+
   const [showModal, setShowModal] = useState(false);
   const [isFormCompleted, setFormCompleted] = useState(false);
   const [showDateOfBirthCalendar, setShowDateOfBirthCalendar] = useState(false);
   const [showStartDateCalendar, setShowStartDateCalendar] = useState(false);
+  const [employees, setEmployees] = useState();
+  const [selectedStartDate, setSelectedStartDate] = useState(''); // État pour stocker la date sélectionnée
+  const [selectedBirthdayDate, setSelectedBirthdayDate] = useState('');
   const departements = ['Sales', 'Marketing', 'Engineering', 'Human Resources', 'Legal'];
   const firstNameInput = useRef();
   const lastNameInput = useRef();
@@ -23,10 +28,6 @@ export default function Home() {
   const cityInput = useRef();
   const zipCodeInput = useRef();
   const currentDate = new Date();
-  const navigate = useNavigate();
-  const [employees, setEmployees] = useState();
-  const [selectedStartDate, setSelectedStartDate] = useState(''); // État pour stocker la date sélectionnée
-  const [selectedBirthdayDate, setSelectedBirthdayDate] = useState('');
 
   // recuperer les employés depuis localStorage
   useEffect(() => {

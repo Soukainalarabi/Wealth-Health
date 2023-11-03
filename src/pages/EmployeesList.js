@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TableEmployee from './TableEmployee';
+import TableEmployee from '../components/TableEmployee';
 
 export default function EmployeesList() {
   const [employees, setEmployees] = useState([]);
