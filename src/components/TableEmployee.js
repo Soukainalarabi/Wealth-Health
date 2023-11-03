@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { ReactId } from 'reactjs-id';
 
 export default function TableEmployee({ data }) {
   if (!data || data.length === 0) {
@@ -28,9 +29,9 @@ export default function TableEmployee({ data }) {
           </thead>
           <tbody>
             {data.map((employee, id) => (
-              <tr key={`employee-${id}`} className={`employee-${id}`}>
+              <tr key={`employee-${ReactId()}`} className={`employee-${id}`}>
                 {keysA.map((val) => (
-                  <td key={`${val}employe-${id}`} className={`${val}employe-${id}`}>{employee[val]}</td>
+                  <td key={`employe-${val}`} className={`${val}employe-${id}`}>{employee[val]}</td>
                 ))}
               </tr>
             ))}
