@@ -1,20 +1,21 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import App from '../App.js';
+import { HashRouter } from 'react-router-dom';
+import App from '../App';
 
 test('renders App component', () => {
   render(
-    <BrowserRouter>
+    <HashRouter>
       <App />
-    </BrowserRouter>,
+    </HashRouter>,
   );
 
-  // You can use queries from @testing-library/react to assert elements in your component
-  const homeLink = screen.getByText('Home');
-  const employeesListLink = screen.getByText('Employees List');
+  const navigationElement = screen.getByText('Navigation'); // Assurez-vous de correspondre au texte de votre composant Navigation
+  const homeElement = screen.getByText('Home');
+  const employeesListElement = screen.getByText('Employees List');
 
-  // Assert that the links are present in the rendered component
-  expect(homeLink).toBeInTheDocument();
-  expect(employeesListLink).toBeInTheDocument();
+  // Vérifiez si les éléments sont présents dans le rendu
+  expect(navigationElement).toBeInTheDocument();
+  expect(homeElement).toBeInTheDocument();
+  expect(employeesListElement).toBeInTheDocument();
 });

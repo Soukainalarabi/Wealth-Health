@@ -1,26 +1,30 @@
 import React from 'react';
-import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { createRoot } from 'react-dom/client';
 import ModalEmployee from '../components/ModalEmployee';
 
 let container = null;
-
+let root = null;
 beforeEach(() => {
   container = document.createElement('div');
   document.body.appendChild(container);
+  root = createRoot(container); // Create a root element
 });
 
 afterEach(() => {
-  unmountComponentAtNode(container);
+  root.unmount(container);
   container.remove();
   container = null;
 });
 
 it('afficher la modale', () => {
   act(() => {
-    const root = createRoot(container); // Create a root element
-    root.render(<ModalEmployee close={() => { }} erreur={false} redirection={() => { }} show />); // Show the modal
+    root.render(<ModalEmployee
+      close={() => { }}
+      erreur={false}
+      redirection={() => { }}
+      show
+    />); // Show the modal
   });
 
   // Expect the presence of the modal's elements when it's shown
@@ -29,8 +33,12 @@ it('afficher la modale', () => {
   expect(container.querySelector('.modal-header')).not.toBeNull();
 
   act(() => {
-    const root = createRoot(container); // Create a root element
-    root.render(<ModalEmployee close={() => { }} erreur={false} redirection={() => { }} show={false} />); // Hide the modal
+    root.render(<ModalEmployee
+      close={() => { }}
+      erreur={false}
+      redirection={() => { }}
+      show={false}
+    />); // Hide the modal
   });
 
   // Expect the absence of the modal's elements when it's hidden
@@ -39,8 +47,12 @@ it('afficher la modale', () => {
   expect(container.querySelector('.modal-header')).toBeNull();
 
   act(() => {
-    const root = createRoot(container); // Create a root element
-    root.render(<ModalEmployee close={() => { }} erreur redirection={() => { }} show={false} />); // Hide the modal
+    root.render(<ModalEmployee
+      close={() => { }}
+      erreur
+      redirection={() => { }}
+      show={false}
+    />); // Hide the modal
   });
 
   // Expect the absence of the modal's elements when it's hidden

@@ -61,7 +61,7 @@ export default function Home() {
     };
 
     // Ajouter le nouvel employé au tableau
-    const updatedEmployees = [...employees, newEmployee];
+    const updatedEmployees = employees ? [...employees, newEmployee] : [newEmployee];
 
     // Enregistrer le tableau mis à jour dans localStorage
     localStorage.setItem('NewEmployee', JSON.stringify(updatedEmployees));
@@ -82,19 +82,16 @@ export default function Home() {
     setShowDateOfBirthCalendar(!showDateOfBirthCalendar);
     setShowStartDateCalendar(false);
   };
-  const handleButtonClick = (formattedDate) => {
+  const handleButtonClick = (startDate) => {
     // Mettez à jour l'état de la date de début sélectionnée
-    setSelectedStartDate(formattedDate);
+    setSelectedStartDate(`${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`);
   };
-  const handleButtonClickBirth = (formattedDate) => {
+  const handleButtonClickBirth = (dateOfBirth) => {
     const minAge = 20;
-    const dateOfBirthStr = formattedDate;
-    const dateOfBirth = new Date(dateOfBirthStr);
-
     const age = currentDate.getFullYear() - dateOfBirth.getFullYear();
 
     if (age >= minAge) {
-      setSelectedBirthdayDate(formattedDate);
+      setSelectedBirthdayDate(`${dateOfBirth.getDate()}/${dateOfBirth.getMonth() + 1}/${dateOfBirth.getFullYear()}`);
       console.log("L'âge est supérieur à", minAge);
     } else {
       console.log("L'âge est inférieur à", minAge);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import EmployeesList from './pages/EmployeesList';
 import Navigation from './components/Navigation';
@@ -7,7 +7,7 @@ import Navigation from './components/Navigation';
 export default function App() {
   return (
     <React.StrictMode>
-      <Router>
+      <HashRouter>
 
         <Navigation />
         <Routes>
@@ -17,7 +17,7 @@ export default function App() {
 
         </Routes>
 
-      </Router>
+      </HashRouter>
     </React.StrictMode>
   );
 }

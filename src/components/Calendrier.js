@@ -54,10 +54,9 @@ export default function Calendrier({ onButtonClick }) {
   };
 
   const handleButtonClick = (jourDuMois) => {
-    const formattedDate = `${jourDuMois}/${mois + 1}/${annee}`;
-    onButtonClick(formattedDate);
+    const formattedDate = `${mois + 1}/${jourDuMois}/${annee}`;
+    onButtonClick(new Date(formattedDate));
     console.log('Date cliquée :', formattedDate);
-    console.log(jourDuMois);
   };
 
   return (

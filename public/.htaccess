@@ -1,0 +1,7 @@
+# Désactiver 'interest-cohort' dans les en-têtes de politique de permissions
+Header set Permissions-Policy "interest-cohort=()"
+
+# Restreindre l'accès à votre fichier .htaccess pour des raisons de sécurité
+<Files .htaccess>
+    Require all denied
+</Files>
