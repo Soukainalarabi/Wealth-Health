@@ -1,21 +1,23 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
+import { ModalSuccessPopup } from 'slarabi-modal';
 import { states } from '../stateApi';
 import '../index.css';
 import SelectComponent from '../components/SelectComponent';
-import ModalEmployee from '../components/ModalEmployee';
+// import Modal from '../components/Modal';
+
 import Calendrier from '../components/Calendrier';
 
 export default function Home() {
   const navigate = useNavigate();
-
   const [showModal, setShowModal] = useState(false);
   const [isFormCompleted, setFormCompleted] = useState(false);
   const [showDateOfBirthCalendar, setShowDateOfBirthCalendar] = useState(false);
   const [showStartDateCalendar, setShowStartDateCalendar] = useState(false);
-  const [employees, setEmployees] = useState();
-  const [selectedStartDate, setSelectedStartDate] = useState(''); // État pour stocker la date sélectionnée
+  const [employees, setEmployees] = useState([]); // Initialize 'employees' as an empty array
+  const [existEmploye, setExistEmploye] = useState(false);
+  const [selectedStartDate, setSelectedStartDate] = useState('');
   const [selectedBirthdayDate, setSelectedBirthdayDate] = useState('');
   const departements = ['Sales', 'Marketing', 'Engineering', 'Human Resources', 'Legal'];
   const firstNameInput = useRef();
@@ -29,24 +31,27 @@ export default function Home() {
   const zipCodeInput = useRef();
   const currentDate = new Date();
 
-  // recuperer les employés depuis localStorage
+  // Retrieve employees from localStorage
   useEffect(() => {
-    const existingEmployees = JSON.parse(localStorage.getItem('NewEmployee'));
-    if (Array.isArray(existingEmployees)) {
-      setEmployees(existingEmployees);
-    }
+    const existingEmployees = JSON.parse(localStorage.getItem('NewEmployee')) || []; // Initialize as an empty array
+    setEmployees(existingEmployees);
   }, []);
 
   const submitForm = (e) => {
     e.preventDefault();
-    if (!firstNameInput.current.value || !lastNameInput.current.value
-       || !dateOfBirthInput.current.value || !startDateInput.current.value
-       || !streetInput.current.value || !cityInput.current.value
-        || !zipCodeInput.current.value) {
+    if (
+      !firstNameInput.current.value
+      || !lastNameInput.current.value
+      || !dateOfBirthInput.current.value
+      || !startDateInput.current.value
+      || !streetInput.current.value
+      || !cityInput.current.value
+      || !zipCodeInput.current.value
+    ) {
       setFormCompleted(true);
+
       return;
     }
-    setShowModal(true);
     startDateInput.current.value = format(currentDate, 'dd/MM/yyyy');
     const newEmployee = {
       firstName: firstNameInput.current.value,
@@ -60,14 +65,24 @@ export default function Home() {
       departmentValue: departmentSelect.current.value,
     };
 
-    // Ajouter le nouvel employé au tableau
-    const updatedEmployees = employees ? [...employees, newEmployee] : [newEmployee];
+    // Check if the employee already exists
+    const employeeExists = employees.some(
+      (emp) => emp.firstName === newEmployee.firstName
+        && emp.lastName === newEmployee.lastName,
+    );
 
-    // Enregistrer le tableau mis à jour dans localStorage
-    localStorage.setItem('NewEmployee', JSON.stringify(updatedEmployees));
-
-    // Mettre à jour l'état des employés
-    setEmployees(updatedEmployees);
+    if (!employeeExists) { // si l'employe n'a pas ete trouvé on le stock dans le loCal
+      const updatedEmployees = [...employees, newEmployee];
+      localStorage.setItem('NewEmployee', JSON.stringify(updatedEmployees));
+      setEmployees(updatedEmployees);
+      setShowModal(true);
+      // setExistEmploye(false);
+      // setFormCompleted(false);
+    } else {
+      setExistEmploye(true);
+      // setShowModal(false);
+      // setFormCompleted(false);
+    }
   };
 
   const allEmployee = () => {
@@ -82,25 +97,32 @@ export default function Home() {
     setShowDateOfBirthCalendar(!showDateOfBirthCalendar);
     setShowStartDateCalendar(false);
   };
+
   const handleButtonClick = (startDate) => {
-    // Mettez à jour l'état de la date de début sélectionnée
-    setSelectedStartDate(`${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`);
+    setSelectedStartDate(
+      `${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`,
+    );
   };
+
   const handleButtonClickBirth = (dateOfBirth) => {
     const minAge = 20;
     const age = currentDate.getFullYear() - dateOfBirth.getFullYear();
 
     if (age >= minAge) {
-      setSelectedBirthdayDate(`${dateOfBirth.getDate()}/${dateOfBirth.getMonth() + 1}/${dateOfBirth.getFullYear()}`);
+      setSelectedBirthdayDate(
+        `${dateOfBirth.getDate()}/${dateOfBirth.getMonth() + 1}/${dateOfBirth.getFullYear()}`,
+      );
       console.log("L'âge est supérieur à", minAge);
     } else {
       console.log("L'âge est inférieur à", minAge);
     }
   };
+
   const toggleStartDateCalendar = () => {
     setShowStartDateCalendar(!showStartDateCalendar);
     setShowDateOfBirthCalendar(false);
   };
+
   return (
     <div className="App">
       <div className="container">
@@ -119,21 +141,16 @@ export default function Home() {
             onChange={(e) => setSelectedBirthdayDate(e.target.value)}
             onClick={toggleDateOfBirthCalendar}
           />
-          {showDateOfBirthCalendar && (
-          <Calendrier onButtonClick={handleButtonClickBirth} />
-
-          )}
+          {showDateOfBirthCalendar && <Calendrier onButtonClick={handleButtonClickBirth} />}
           <label>Start Date</label>
           <input
             ref={startDateInput}
             id="start-date"
             type="text"
-            defaultValue={selectedStartDate} // Affichez la date sélectionnée
+            defaultValue={selectedStartDate}
             onClick={toggleStartDateCalendar}
           />
-          {showStartDateCalendar && (
-            <Calendrier onButtonClick={handleButtonClick} />
-          )}
+          {showStartDateCalendar && <Calendrier onButtonClick={handleButtonClick} />}
           <label>Adresse</label>
           <fieldset className="address">
             <label>Street</label>
@@ -141,16 +158,23 @@ export default function Home() {
             <label>City</label>
             <input ref={cityInput} id="city" type="text" />
             <label>State</label>
-            <SelectComponent options={states} name="state" id="state" optionSelected={stateSelect} key={stateSelect.abbreviation} />
+            <SelectComponent options={states} name="state" id="state" optionSelected={stateSelect} />
             <label>Zip Code</label>
             <input ref={zipCodeInput} id="zip-code" type="number" />
           </fieldset>
           <label>Department</label>
           <SelectComponent options={departements} name="department" id="department" optionSelected={departmentSelect} />
-          {isFormCompleted && !showModal ? (<div className="erreur">Veuillez remplir le formulaire</div>) : null}
-          <button className="buttonSubmit" type="submit">Save</button>
+          {isFormCompleted && !showModal && !existEmploye ? (
+            <div className="erreur">Veuillez remplir le formulaire</div>
+          ) : null}
+          {!isFormCompleted && !showModal && existEmploye ? (
+            <div className="erreur">Cet employé existe déjà</div>
+          ) : null}
+          <button className="buttonSubmit" type="submit">
+            Save
+          </button>
         </form>
-        <ModalEmployee
+        <ModalSuccessPopup
           close={closeModal}
           redirection={allEmployee}
           show={showModal}

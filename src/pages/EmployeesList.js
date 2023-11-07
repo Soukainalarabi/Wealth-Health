@@ -6,7 +6,7 @@ export default function EmployeesList() {
 
   useEffect(() => {
     const storedData = localStorage.getItem('NewEmployee');
-
+    console.log(storedData);
     if (storedData) { // Vérifiez si des données existent dans localStorage
       const parsedData = JSON.parse(storedData);
       // Si les données sont un tableau, mettez-les à jour dans l'état local

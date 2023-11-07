@@ -1,7 +1,7 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { createRoot } from 'react-dom/client';
-import ModalEmployee from '../components/ModalEmployee';
+import Modal from '../components/Modal';
 
 let container = null;
 let root = null;
@@ -19,7 +19,7 @@ afterEach(() => {
 
 it('afficher la modale', () => {
   act(() => {
-    root.render(<ModalEmployee
+    root.render(<Modal
       close={() => { }}
       erreur={false}
       redirection={() => { }}
@@ -33,7 +33,7 @@ it('afficher la modale', () => {
   expect(container.querySelector('.modal-header')).not.toBeNull();
 
   act(() => {
-    root.render(<ModalEmployee
+    root.render(<Modal
       close={() => { }}
       erreur={false}
       redirection={() => { }}
@@ -47,7 +47,7 @@ it('afficher la modale', () => {
   expect(container.querySelector('.modal-header')).toBeNull();
 
   act(() => {
-    root.render(<ModalEmployee
+    root.render(<Modal
       close={() => { }}
       erreur
       redirection={() => { }}

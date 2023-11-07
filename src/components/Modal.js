@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import closeButton from '../assets/cross.png';
+import closeButton from '../assets/cross.WebP';
 
-export default function ModalEmployee({
+export default function Modal({
   close, redirection, show, erreur,
 }) {
   return (
@@ -27,13 +27,13 @@ export default function ModalEmployee({
 
   );
 }
-ModalEmployee.propTypes = {
+Modal.propTypes = {
   close: PropTypes.func,
   redirection: PropTypes.func,
   show: PropTypes.bool,
   erreur: PropTypes.bool,
 };
-ModalEmployee.defaultProps = {
+Modal.defaultProps = {
   close: '',
   redirection: '',
   show: false,
