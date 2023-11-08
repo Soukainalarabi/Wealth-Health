@@ -20,6 +20,14 @@ button .jourNumber {
   width: 29px !important;
   height: 26px !important;
 }
+.input-search{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+#search{
+  margin-left: 11px;
+}
 .daysNumber {
   display: flex;
 }
