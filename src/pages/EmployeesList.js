@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import TableEmployee from '../components/TableEmployee';
+import { Link } from 'react-router-dom';
+import {
+  TableEmploye,
+} from 'slarabi-components';
 
 export default function EmployeesList() {
   const [employees, setEmployees] = useState([]);
-
   useEffect(() => {
     const storedData = localStorage.getItem('NewEmployee');
     console.log(storedData);
@@ -17,6 +19,19 @@ export default function EmployeesList() {
   }, []);
 
   return (
-    <TableEmployee data={employees} />
+    !employees || employees.length === 0 ? (
+      <div className="container">
+        <h1>No employees found</h1>
+        <Link to="/">Home</Link>
+      </div>
+    ) : (
+      <div className="container">
+
+        {' '}
+        <TableEmploye data={employees} />
+        <Link to="/">Home</Link>
+      </div>
+    )
+
   );
 }

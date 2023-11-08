@@ -29,7 +29,6 @@ export default function Calendrier({ onButtonClick }) {
     const joursCourants = Array.from({ length: lastDay }, (_, index) => index + 1);
     return [...joursPrecedents, ...joursCourants];
   }, [firstDay, lastDay]);
-  console.log(joursDansMois);
   const dateAujourdui = `${moisNames[mois]} ${annee}`;
 
   const handleMoisPrecedent = () => {
@@ -50,13 +49,11 @@ export default function Calendrier({ onButtonClick }) {
   const handleMoisSuivant = () => {
     const nouveauMois = (mois + 1 + 12) % 12;
     setMois(nouveauMois);
-    console.log('hello', nouveauMois);
   };
 
   const handleButtonClick = (jourDuMois) => {
     const formattedDate = `${mois + 1}/${jourDuMois}/${annee}`;
     onButtonClick(new Date(formattedDate));
-    console.log('Date cliquée :', formattedDate);
   };
 
   return (

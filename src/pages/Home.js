@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
-import { ModalSuccessPopup } from 'slarabi-modal';
+import {
+  ModalSuccessPopup, Calendrier, SelectComponent,
+} from 'slarabi-components';
+
 import { states } from '../stateApi';
 import '../index.css';
-import SelectComponent from '../components/SelectComponent';
 // import Modal from '../components/Modal';
-
-import Calendrier from '../components/Calendrier';
 
 export default function Home() {
   const navigate = useNavigate();

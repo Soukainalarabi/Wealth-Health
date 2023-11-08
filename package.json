@@ -17,7 +17,8 @@
     "react-router-dom": "6.10.0",
     "react-scripts": "^5.0.1",
     "reactjs-id": "^1.0.6",
-    "slarabi-modal": "^1.0.10",
+    "slarabi-components": "^1.0.17",
+    "styled-components": "^6.1.1",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
