@@ -104,11 +104,27 @@ label {
 /* ///////////////////////////////////////*/
 
 
-
+.tab-footer{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+.tab-footer button+button{
+  margin-left: 10px;
+}
 table,
 th,
 td {
   border: 1px solid #6e8511;
+}
+#employee-table tr {
+  height: 57px;
+}
+/* th{
+  text-align: justify
+} */
+.tab-footer p {
+  margin-right: 100px;
 }
 .react-calendar {
   width: 300px;

@@ -6,6 +6,9 @@ export default function EmployeesList() {
   const [employees, setEmployees] = useState([]);
   const [searchValue, setSearchValue] = useState(''); // Utilisez un état local pour la valeur de recherche
   const [filteredEmployees, setFilteredEmployees] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [employeesPerPage, setEmployeesPerPage] = useState(25);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const storedData = localStorage.getItem('NewEmployee');
@@ -30,7 +33,21 @@ export default function EmployeesList() {
     );
     setFilteredEmployees(filtered);
   }, [employees, searchValue]);
+  const indexOfLastEmployee = currentPage * employeesPerPage;
+  const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+  const currentEmployees = filteredEmployees.slice(indexOfFirstEmployee, indexOfLastEmployee);
 
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const nextPage = () => {
+    if (indexOfLastEmployee < filteredEmployees.length) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
   return !employees || employees.length === 0 ? (
     <div className="container">
       <h1>No employees found</h1>
@@ -45,39 +62,49 @@ export default function EmployeesList() {
           id="search"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
-           // Gérez l'événement onChange correctement
+        // Gérez l'événement onChange correctement
         />
       </div>
-      <TableEmploye data={filteredEmployees} />
-      {filteredEmployees.length !== employees.length ? (
-        <p>
-          Showing 1 to
+      <TableEmploye data={currentEmployees} />
+      <div className="tab-footer">
+        {filteredEmployees.length !== employees.length ? (
+          <p>
+            Showing 1 to
+            {' '}
+            {filteredEmployees.length}
+            {' '}
+            of
+            {' '}
+            {employees.length}
+            {' '}
+            entries (filtered from
+            {' '}
+            {employees.length}
+            {' '}
+            total entries)
+          </p>
+        ) : (
+          <p>
+            Showing 1 to
+            {' '}
+            {currentEmployees.length}
+            {' '}
+            of
+            {' '}
+            {employees.length}
+            {' '}
+            entries
+          </p>
+        )}
+        <button type="button" onClick={prevPage}> Previous</button>
+        <button type="button">
           {' '}
-          {filteredEmployees.length}
-          {' '}
-          of
-          {' '}
-          {employees.length}
-          {' '}
-          entries (filtered from
-          {' '}
-          {employees.length}
-          {' '}
-          total entries)
-        </p>
-      ) : (
-        <p>
-          Showing 1 to
-          {' '}
-          {employees.length}
-          {' '}
-          of
-          {' '}
-          {employees.length}
-          {' '}
-          entries
-        </p>
-      )}
+          {currentPage}
+        </button>
+
+        <button type="button" onClick={nextPage}> Next</button>
+
+      </div>
       <Link to="/">Home</Link>
     </div>
   );
