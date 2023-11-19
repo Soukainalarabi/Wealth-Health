@@ -1,8 +1,10 @@
 ![Logo de Mon Projet](src/assets/logo.WebP)
 
-[![forthebadge](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMjAuODUxNTc3NzU4Nzg5MDYiIGhlaWdodD0iMzUiIHZpZXdCb3g9IjAgMCAyMjAuODUxNTc3NzU4Nzg5MDYgMzUiPjxyZWN0IHdpZHRoPSIxMDYuNjMyODIwMTI5Mzk0NTMiIGhlaWdodD0iMzUiIGZpbGw9IiM1Yjc5MzkiLz48cmVjdCB4PSIxMDYuNjMyODIwMTI5Mzk0NTMiIHdpZHRoPSIxMTQuMjE4NzU3NjI5Mzk0NTMiIGhlaWdodD0iMzUiIGZpbGw9IiM5MGFjNzMiLz48dGV4dCB4PSI1My4zMTY0MTAwNjQ2OTcyNjYiIHk9IjE3LjUiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSInUm9ib3RvJywgc2Fucy1zZXJpZiIgZmlsbD0iI0ZGRkZGRiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgYWxpZ25tZW50LWJhc2VsaW5lPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5NQURFIFdJVEggPC90ZXh0Pjx0ZXh0IHg9IjE2My43NDIxOTg5NDQwOTE4IiB5PSIxNy41IiBmb250LXNpemU9IjEyIiBmb250LWZhbWlseT0iJ01vbnRzZXJyYXQnLCBzYW5zLXNlcmlmIiBmaWxsPSIjRkZGRkZGIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iOTAwIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPkpBVkFTQ1JJUFQ8L3RleHQ+PC9zdmc+)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://forthebadge.com)
-[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
+
+[![forthebadge](https://forthebadge.com/images/badges/cc-0.svg)](https://forthebadge.com)
+[![forthebadge](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMjAuODUxNTc3NzU4Nzg5MDYiIGhlaWdodD0iMzUiIHZpZXdCb3g9IjAgMCAyMjAuODUxNTc3NzU4Nzg5MDYgMzUiPjxyZWN0IHdpZHRoPSIxMDYuNjMyODIwMTI5Mzk0NTMiIGhlaWdodD0iMzUiIGZpbGw9IiM4MGFkODgiLz48cmVjdCB4PSIxMDYuNjMyODIwMTI5Mzk0NTMiIHdpZHRoPSIxMTQuMjE4NzU3NjI5Mzk0NTMiIGhlaWdodD0iMzUiIGZpbGw9IiNmOGU3MWMiLz48dGV4dCB4PSI1My4zMTY0MTAwNjQ2OTcyNjYiIHk9IjE3LjUiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSInUm9ib3RvJywgc2Fucy1zZXJpZiIgZmlsbD0iI0ZGRkZGRiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgYWxpZ25tZW50LWJhc2VsaW5lPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5NQURFIFdJVEg8L3RleHQ+PHRleHQgeD0iMTYzLjc0MjE5ODk0NDA5MTgiIHk9IjE3LjUiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSInTW9udHNlcnJhdCcsIHNhbnMtc2VyaWYiIGZpbGw9IiMzNTMxMzEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI5MDAiIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMiI+SkFWQVNDUklQVDwvdGV4dD48L3N2Zz4=)](https://forthebadge.com)
+[![forthebadge](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTEuMzM1OTQ1MTI5Mzk0NTMiIGhlaWdodD0iMzUiIHZpZXdCb3g9IjAgMCAxMTEuMzM1OTQ1MTI5Mzk0NTMgMzUiPjxyZWN0IHdpZHRoPSI2MC42NzE4Nzg4MTQ2OTcyNjYiIGhlaWdodD0iMzUiIGZpbGw9IiM4MGFkODgiLz48cmVjdCB4PSI2MC42NzE4Nzg4MTQ2OTcyNjYiIHdpZHRoPSI1MC42NjQwNjYzMTQ2OTcyNjYiIGhlaWdodD0iMzUiIGZpbGw9IiM0YTkwZTIiLz48dGV4dCB4PSIzMC4zMzU5Mzk0MDczNDg2MzMiIHk9IjE3LjUiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSInUm9ib3RvJywgc2Fucy1zZXJpZiIgZmlsbD0iI0ZGRkZGRiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgYWxpZ25tZW50LWJhc2VsaW5lPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5VU0VTPC90ZXh0Pjx0ZXh0IHg9Ijg2LjAwMzkxMTk3MjA0NTkiIHk9IjE3LjUiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSInTW9udHNlcnJhdCcsIHNhbnMtc2VyaWYiIGZpbGw9IiMzNTMxMzEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI5MDAiIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMiI+Q1NTPC90ZXh0Pjwvc3ZnPg==)](https://forthebadge.com)
+[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=blue)](https://reactjs.org/)
 
 
 
@@ -18,16 +20,16 @@ HRnet est une application web interne dédiée à la gestion des dossiers des em
 
 ## Contraintes Techniques
 
-- Conversion Complète en React :**
+- Conversion Complète en React :
 L'intégralité du projet HRnet doit être transformée en utilisant la bibliothèque React. Cette transition implique une migration exhaustive de l'architecture et du code existants vers le paradigme React.
 
-- Conversion d'un Plugin jQuery en React :**
+- Conversion d'un Plugin jQuery en React :
 Les plugins jQuery actuels, tels que le sélecteur de date, la fenêtre modale, les menus déroulants et le plugin pour les tables de données, doivent être convertis en composants React.
 
-- Remplacement des Plugins Restants :**
+- Remplacement des Plugins Restants :
 Les trois plugins jQuery restants seront substitués par des composants React, soit développés manuellement, soit importés depuis des bibliothèques existantes, selon la disponibilité des ressources.
 
-- Publication du Composant React sur npm :**
+- Publication du Composant React sur npm :
 Une fois que l'application HRnet fonctionne avec React, le composant React résultant sera publié sur npm en tant que package réutilisable.
 
 
@@ -39,13 +41,15 @@ git clone https://github.com/Soukainalarabi/Wealth-Health.git
 ### Installation des Dépendances Front-End
 Installez toutes les dépendances pour le front-end:
 
-npm install ou yarn
+```bash
+npm install ou yarn add
+```
 
 ### Lancement du Front-End
 Lancez le front-end:
-
+```bash
 npm start ou yarn start
-
+```
 Le front-end sera accessible à l'URL: [http://localhost:3000/Wealth-Health/#/](http://localhost:3000/Wealth-Health/#/).
 
 ## Installation du Package
@@ -55,9 +59,9 @@ slarabi-components est une bibliothèque de composants React réutilisables faci
 Pour plus de détails, veuillez consulter mon profil npm : [slarabi-components sur npm](https://www.npmjs.com/package/slarabi-components).
 
 Pour installer le package npm, utilisez la commande suivante :
-
+```bash 
 npm install slarabi-components
-
+```
 ## Déploiement
 
 Le site est actuellement déployé sur GitHub Pages. Vous pouvez y accéder en suivant ce lien : [HRnet sur GitHub Pages](https://soukainalarabi.github.io/Wealth-Health/#/).
