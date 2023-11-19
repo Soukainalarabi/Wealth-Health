@@ -1,6 +1,9 @@
 
 <div align="center">
-  <img src="src/assets/logo.WebP" alt="Logo de Mon Projet" >
+  <img src="src/assets/logo.WebP" alt="Logo de Mon Projet" style=" border-radius: 50% ">
+
+
+
 
 
 
