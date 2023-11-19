@@ -1,15 +1,14 @@
 
-<p align="center">
-  <img src="src/assets/logo.WebP" alt="Logo de Mon Projet" width="200" height="100">
-</p>
+<div align="center">
+  <img src="src/assets/logo.WebP" alt="Logo de Mon Projet" >
 
-[![forthebadge](https://forthebadge.com/images/badges/cc-0.svg)](https://forthebadge.com)
+
 
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![React](https://img.shields.io/badge/React-70DAFB?style=for-the-badge&logo=react&logoColor=blue)](https://reactjs.org/)
 
-
+</div>
 
 # HRnet
 
