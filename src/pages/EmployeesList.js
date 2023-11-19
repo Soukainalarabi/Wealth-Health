@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { TableEmploye } from 'slarabi-components';
-// import TableEmployee from '../components/TableEmployee';
+// import { TableEmploye } from 'slarabi-components';
+import TableEmployee from '../components/TableEmployee';
 
 export default function EmployeesList() {
   const [employees, setEmployees] = useState([]);
@@ -10,9 +10,20 @@ export default function EmployeesList() {
   // eslint-disable-next-line no-unused-vars
   const [employeesPerPage, setEmployeesPerPage] = useState(12);
   const [currentPage, setCurrentPage] = useState(1);
-
+  const tableHead = {
+    firstName: 'Nom',
+    lastName: 'Prenom',
+    dateOfBirth: 'date naissance',
+    startDate: 'Date début',
+    street: 'Quartier',
+    city: 'Ville',
+    zipCode: 'Code postal',
+    stateValue: 'Pays',
+    departmentValue: 'Département',
+  };
   useEffect(() => {
     const storedData = localStorage.getItem('NewEmployee');
+
     if (storedData) {
       const parsedData = JSON.parse(storedData);
       if (Array.isArray(parsedData)) {
@@ -67,7 +78,7 @@ export default function EmployeesList() {
         // Gérez l'événement onChange correctement
         />
       </div>
-      <TableEmploye data={currentEmployees} />
+      <TableEmployee data={currentEmployees} head={tableHead} />
       <div className="tab-footer">
         {filteredEmployees.length !== employees.length ? (
           <p>

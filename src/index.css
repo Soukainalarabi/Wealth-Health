@@ -79,6 +79,12 @@ h2 {
 input , #department,#state{
   height: 30px
 }
+.erreurPage{
+  text-align: center;
+    font-size: 80px;
+    margin-top: 200px;
+}
+
 /* /////////////////////////style modal //////////////*/
 /* .modal {
   background-color: #6e8511;
@@ -155,6 +161,7 @@ table{
     width: 100%;
 
 }
+
 tbody{
   border: 2px solid #6e8511;
 }
@@ -204,12 +211,38 @@ tbody{
  
 td ,th{
   padding: 2px;
-  font-size: 12px;
+  font-size: 10px;
 }
+}
+@media (max-width:847px){
+  .erreurPage{
+    font-size: 55px;
+    margin-top: 150px;
+}
+th{
+  padding: 1px!important;
+}
+table{
+  padding: 5px !important;
+}
+td{
+  padding:3px!important
+}
+/* td{
+  padding:4px;
+}
+th{
+  font-size:10px
+} */
 }
 @media screen and (max-width: 600px) {
   table {
-    overflow-x: auto;
+    overflow-x: auto; 
     display: block; /* Empêcher le tableau de s'étendre hors de la fenêtre */
   }
+  .erreurPage{
+      font-size: 29px;
+      margin-top: 70px;
+  }
+  
 }

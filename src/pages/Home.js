@@ -51,6 +51,7 @@ export default function Home() {
 
       return;
     }
+    setFormCompleted(false);
     startDateInput.current.value = format(currentDate, 'dd/MM/yyyy');
     const newEmployee = {
       firstName: firstNameInput.current.value,
@@ -162,7 +163,7 @@ export default function Home() {
           {isFormCompleted && !showModal && !existEmploye ? (
             <div className="erreur">Veuillez remplir le formulaire</div>
           ) : null}
-          {!isFormCompleted && !showModal && existEmploye ? (
+          { existEmploye ? (
             <div className="erreur">Cet employé existe déjà</div>
           ) : null}
           <button className="buttonSubmit" type="submit">

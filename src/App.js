@@ -3,21 +3,25 @@ import { Routes, Route, HashRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import EmployeesList from './pages/EmployeesList';
 import Navigation from './components/Navigation';
+import Erreur from './components/Erreur';
 
 export default function App() {
   return (
-    <React.StrictMode>
-      <HashRouter>
+    <div className="container">
+      <React.StrictMode>
+        <HashRouter>
 
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<Home />} />
+          <Navigation />
+          <Routes>
+            <Route path="/" element={<Home />} />
 
-          <Route path="/employeesList" element={<EmployeesList />} />
+            <Route path="/employeesList" element={<EmployeesList />} />
+            <Route path="*" element={<Erreur />} />
 
-        </Routes>
+          </Routes>
 
-      </HashRouter>
-    </React.StrictMode>
+        </HashRouter>
+      </React.StrictMode>
+    </div>
   );
 }

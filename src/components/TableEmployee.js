@@ -7,17 +7,19 @@ import { ReactId } from 'reactjs-id';
 const StyledTable = styled.table`
 border-collapse: collapse;
   border: 2px solid #6e8511;
-    padding: 10px;
     width: 100%;
+    padding:10px;
 th,td {
     border: 1px solid #6e8511;
     padding: 8px;
+    text-align: justify;
+
   
 }
 `;
 const StyledBody = styled.tbody`  border: 2px solid #6e8511;
   `;
-export default function TableEmployee({ data }) {
+export default function TableEmployee({ data, head }) {
   if (!data || data.length === 0) {
     return (
       <div>
@@ -28,7 +30,6 @@ export default function TableEmployee({ data }) {
   }
 
   const keysA = Object.keys(data[0]);
-
   return (
     <div id="employee-div" className="container">
       <h1>Current Employees</h1>
@@ -37,7 +38,7 @@ export default function TableEmployee({ data }) {
           <thead>
             <tr>
               {keysA.map((key) => (
-                <th key={key}>{key}</th>
+                <th key={key}>{head[key]}</th>
               ))}
             </tr>
           </thead>
@@ -57,7 +58,19 @@ export default function TableEmployee({ data }) {
 }
 TableEmployee.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.number })),
+  head: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    dateOfBirth: PropTypes.string,
+    startDate: PropTypes.string,
+    street: PropTypes.string,
+    city: PropTypes.string,
+    zipCode: PropTypes.string,
+    stateValue: PropTypes.string,
+    departmentValue: PropTypes.string,
+  }),
 };
 TableEmployee.defaultProps = {
   data: [],
+  head: [],
 };
