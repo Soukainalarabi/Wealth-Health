@@ -1,5 +1,31 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const StyledButton = styled.button` width: 29px !important;
+height: 26px !important;
+&.jourNumber{
+  border: none;
+  background-color: white;
+}
+&.jourNumber-actuel {
+  background-color: #6e8511;
+}
+`;
+
+const StyledTable = styled.table`border-collapse: collapse;
+border: 2px solid #6e8511;
+  padding: 10px;
+  width: 100%;
+  th,
+td {
+    border: 1px solid #6e8511;
+    padding: 8px;
+  
+}
+  `;
+const StyledBody = styled.tbody`  border: 2px solid #6e8511;
+  `;
 
 export default function Calendrier({ onButtonClick }) {
   const date = new Date();
@@ -58,8 +84,8 @@ export default function Calendrier({ onButtonClick }) {
 
   return (
     <div className="container">
-      <table className="cal_calendrier">
-        <tbody id="cal_body">
+      <StyledTable className="cal_calendrier">
+        <StyledBody id="cal_body">
           <tr>
             <th colSpan="1">
               <button className="buttonMois" type="button" onClick={handleAnneePrecedente}>{'<<'}</button>
@@ -98,21 +124,21 @@ export default function Calendrier({ onButtonClick }) {
               {joursDansMois.slice(rowIndex * 7, (rowIndex + 1) * 7).map((jourDuMois, index) => (
                 <td key={`jour${jourDuMois !== null ? jourDuMois : `null${index}`}`} className={`jour${jourDuMois !== null ? jourDuMois : `null${index}`}`}>
                   {jourDuMois !== null ? (
-                    <button
+                    <StyledButton
                       className={jour === jourDuMois ? 'jourNumber-actuel' : 'jourNumber'}
                       type="button"
                       onClick={() => handleButtonClick(jourDuMois)}
                     >
                       {jourDuMois}
-                    </button>
+                    </StyledButton>
                   ) : null}
                 </td>
               ))}
             </tr>
           ))}
 
-        </tbody>
-      </table>
+        </StyledBody>
+      </StyledTable>
     </div>
   );
 }

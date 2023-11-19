@@ -9276,10 +9276,10 @@ sisteransi@^1.0.5:
   resolved "https://registry.npmjs.org/sisteransi/-/sisteransi-1.0.5.tgz"
   integrity sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==
 
-slarabi-components@^1.0.12, slarabi-components@^1.0.18:
-  version "1.0.18"
-  resolved "https://registry.npmjs.org/slarabi-components/-/slarabi-components-1.0.18.tgz"
-  integrity sha512-PGNSD3bLFjYgTc8kskj3G7Xr8DikKN2bQdaKfT6Fxv18y4ZNOnPGoH150fY8Ri3RcFPiaJuGRmY0LQzRoymkZw==
+slarabi-components@^1.0.12, slarabi-components@^1.0.21:
+  version "1.0.21"
+  resolved "https://registry.npmjs.org/slarabi-components/-/slarabi-components-1.0.21.tgz"
+  integrity sha512-Km41bfJ36YvM3SBINZh7Q8obj43rlHXCC8Ml1i3r1zjvtLhN2IMML3ZJW+H7k37FgoxLtUyDg0dXmXvWBUS8RQ==
   dependencies:
     prop-types "^15.8.1"
     reactjs-id "^1.0.6"

@@ -5,3 +5,8 @@ Header set Permissions-Policy "interest-cohort=()"
 <Files .htaccess>
     Require all denied
 </Files>
+
+# Cache-Control pour divers types de ressources
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|webP|gif|js|css|swf|html?)$">
+    Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>

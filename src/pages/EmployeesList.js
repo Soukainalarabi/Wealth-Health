@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TableEmploye } from 'slarabi-components';
+// import TableEmployee from '../components/TableEmployee';
 
 export default function EmployeesList() {
   const [employees, setEmployees] = useState([]);
   const [searchValue, setSearchValue] = useState(''); // Utilisez un état local pour la valeur de recherche
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   // eslint-disable-next-line no-unused-vars
-  const [employeesPerPage, setEmployeesPerPage] = useState(25);
+  const [employeesPerPage, setEmployeesPerPage] = useState(12);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -33,6 +34,7 @@ export default function EmployeesList() {
     );
     setFilteredEmployees(filtered);
   }, [employees, searchValue]);
+  // //nombre des pages = total nombre des employéés / taille de page + ()
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
   const currentEmployees = filteredEmployees.slice(indexOfFirstEmployee, indexOfLastEmployee);

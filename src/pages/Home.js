@@ -2,12 +2,11 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import {
-  ModalSuccessPopup, Calendrier, SelectComponent,
+  ModalSuccessPopup, SelectComponent, Calendrier,
 } from 'slarabi-components';
-
 import { states } from '../stateApi';
 import '../index.css';
-// import Modal from '../components/Modal';
+// import Calendrier from '../components/Calendrier';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -76,12 +75,8 @@ export default function Home() {
       localStorage.setItem('NewEmployee', JSON.stringify(updatedEmployees));
       setEmployees(updatedEmployees);
       setShowModal(true);
-      // setExistEmploye(false);
-      // setFormCompleted(false);
     } else {
       setExistEmploye(true);
-      // setShowModal(false);
-      // setFormCompleted(false);
     }
   };
 

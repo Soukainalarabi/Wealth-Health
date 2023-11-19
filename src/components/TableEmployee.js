@@ -1,8 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { ReactId } from 'reactjs-id';
 
+const StyledTable = styled.table`
+border-collapse: collapse;
+  border: 2px solid #6e8511;
+    padding: 10px;
+    width: 100%;
+th,td {
+    border: 1px solid #6e8511;
+    padding: 8px;
+  
+}
+`;
+const StyledBody = styled.tbody`  border: 2px solid #6e8511;
+  `;
 export default function TableEmployee({ data }) {
   if (!data || data.length === 0) {
     return (
@@ -19,7 +33,7 @@ export default function TableEmployee({ data }) {
     <div id="employee-div" className="container">
       <h1>Current Employees</h1>
       <div id="employee-table" className="display">
-        <table>
+        <StyledTable>
           <thead>
             <tr>
               {keysA.map((key) => (
@@ -27,7 +41,7 @@ export default function TableEmployee({ data }) {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <StyledBody>
             {data.map((employee, id) => (
               <tr key={`employee-${ReactId()}`} className={`employee-${id}`}>
                 {keysA.map((val) => (
@@ -35,9 +49,8 @@ export default function TableEmployee({ data }) {
                 ))}
               </tr>
             ))}
-          </tbody>
-        </table>
-        <Link to="/">Home</Link>
+          </StyledBody>
+        </StyledTable>
       </div>
     </div>
   );

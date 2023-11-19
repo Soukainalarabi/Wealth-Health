@@ -6,19 +6,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 .title {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-button .jourNumber {
-  width: 29px !important;
-  height: 26px !important;
 }
 .input-search{
   display: flex;
@@ -27,9 +18,6 @@ button .jourNumber {
 }
 #search{
   margin-left: 11px;
-}
-.daysNumber {
-  display: flex;
 }
 .container {
   display: flex;
@@ -42,6 +30,54 @@ label {
   display: block;
   margin-top: 1rem;
   margin-bottom: 10px;
+}
+fieldset {
+  display: grid !important;
+  margin-inline-start: 2px !important;
+  margin-inline-end: 2px !important;
+  padding-block-start: 0.35em !important;
+  padding-inline-start: 0.75em !important;
+  padding-inline-end: 0.75em !important;
+  padding-block-end: 0.625em !important;
+  min-inline-size: min-content !important;
+  border-width: 2px !important;
+  border-style: groove !important;
+  border-color: rgb(192, 192, 192) !important;
+  border-image: initial !important;
+}
+
+.address {
+  margin-top: 10px;
+}
+
+.erreur {
+  color: red;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+.imgLogo {
+  width: 250px;
+  height: 200px;
+}
+h2 {
+  color: #6e8511 !important;
+}
+.buttonSubmit {
+  width: 100px;
+  height: 35px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 20px !important;
+  background-color: #6e8511 !important;
+  color: white !important;
+  border-radius: 10px !important;
+  border: none !important;
+}
+
+input , #department,#state{
+  height: 30px
 }
 /* /////////////////////////style modal //////////////*/
 /* .modal {
@@ -98,11 +134,55 @@ label {
 /* /////////////////////////style calendrier //////////////*/
 
 
-.jourNumber-actuel {
+/* .jourNumber-actuel {
   background-color: #6e8511;
 }
+button .jourNumber {
+  width: 29px !important;
+  height: 26px !important;
+}
+.jourNumber{
+  border: none;
+    background-color: white;
+}
+.daysNumber {
+  display: flex;
+}
+table{
+  border-collapse: collapse;
+  border: 2px solid #6e8511;
+    padding: 10px;
+    width: 100%;
+
+}
+tbody{
+  border: 2px solid #6e8511;
+}
+th,
+td {
+    border: 1px solid #6e8511;
+    padding: 8px;
+  
+} */
 /* ///////////////////////////////////////*/
 
+/* /////////////////////////style table //////////////*/
+/* th,
+td {
+    border: 1px solid #6e8511;
+    padding: 8px;
+  
+}
+table{
+  border-collapse: collapse;
+  border: 2px solid #6e8511;
+    padding: 10px;
+    width: 100%;
+
+}
+tbody{
+  border: 2px solid #6e8511;
+} */
 
 .tab-footer{
   display: flex;
@@ -112,70 +192,24 @@ label {
 .tab-footer button+button{
   margin-left: 10px;
 }
-table,
-th,
-td {
-  border: 1px solid #6e8511;
-}
+
 #employee-table tr {
   height: 57px;
 }
-/* th{
-  text-align: justify
-} */
 .tab-footer p {
   margin-right: 100px;
 }
-.react-calendar {
-  width: 300px;
-}
-.react-calendar__navigation__label {
-  width: 200px !important;
-}
-fieldset {
-  display: grid !important;
-  margin-inline-start: 2px !important;
-  margin-inline-end: 2px !important;
-  padding-block-start: 0.35em !important;
-  padding-inline-start: 0.75em !important;
-  padding-inline-end: 0.75em !important;
-  padding-block-end: 0.625em !important;
-  min-inline-size: min-content !important;
-  border-width: 2px !important;
-  border-style: groove !important;
-  border-color: rgb(192, 192, 192) !important;
-  border-image: initial !important;
-}
-.react-calendar button {
-  border: 1 solid silver !important ;
-}
 
-.address {
-  margin-top: 10px;
+@media (max-width:1090px){
+ 
+td ,th{
+  padding: 2px;
+  font-size: 12px;
 }
-
-.erreur {
-  color: red;
 }
-form {
-  display: flex;
-  flex-direction: column;
-}
-.imgLogo {
-  width: 250px;
-  height: 200px;
-}
-h2 {
-  color: #6e8511 !important;
-}
-.buttonSubmit {
-  width: 100px;
-  height: 35px;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  margin-top: 20px !important;
-  background-color: #6e8511 !important;
-  color: white !important;
-  border-radius: 10px !important;
-  border: none !important;
+@media screen and (max-width: 600px) {
+  table {
+    overflow-x: auto;
+    display: block; /* Empêcher le tableau de s'étendre hors de la fenêtre */
+  }
 }
