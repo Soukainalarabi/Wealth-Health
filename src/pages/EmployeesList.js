@@ -67,7 +67,7 @@ export default function EmployeesList() {
       <Link to="/">Home</Link>
     </div>
   ) : (
-    <div className="container">
+    <div className="container-flex">
       <div className="input-search">
         <label>Search</label>
         <input

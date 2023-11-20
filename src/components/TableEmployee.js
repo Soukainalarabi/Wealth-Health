@@ -31,7 +31,7 @@ export default function TableEmployee({ data, head }) {
 
   const keysA = Object.keys(data[0]);
   return (
-    <div id="employee-div" className="container">
+    <div id="employee-div">
       <h1>Current Employees</h1>
       <div id="employee-table" className="display">
         <StyledTable>

@@ -7,7 +7,7 @@ import Erreur from './components/Erreur';
 
 export default function App() {
   return (
-    <div className="container">
+    <div className="container-flex">
       <React.StrictMode>
         <HashRouter>
 
