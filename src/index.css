@@ -6,83 +6,39 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 .title {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-
-.container {
+.input-search{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+#search{
+  margin-left: 11px;
+}
+.container ,.container-flex{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-
+.container-flex{
+ width: 950px;
+ margin-left: auto;
+ margin-right: auto;
+}
 label {
   display: block;
   margin-top: 1rem;
   margin-bottom: 10px;
 }
-/* .modal-body{
-  display: flex;
-    justify-content: flex-end;
-} */
-.modal{
-  background-color:#6e8511;
-  /* display: inline-block; */
-    vertical-align: middle;
-    position: relative;
-    z-index: 2;
-    max-width: 500px;
-    box-sizing: border-box;
-    width: 90%;
-    background: #fff;
-    padding: 15px 30px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -o-border-radius: 8px;
-    -ms-border-radius: 8px;
-    border-radius: 8px;
-    -webkit-box-shadow: 0 0 10px #000;
-    -moz-box-shadow: 0 0 10px #000;
-    -o-box-shadow: 0 0 10px #000;
-    -ms-box-shadow: 0 0 10px #000;
-    box-shadow: 0 0 10px #000;
-    text-align: left;
-
-}
-.centered{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.modal-body{
-  display: flex;
-  flex-direction: row;
-}
-table, th, td {
-
-  border: 1px solid #6e8511
-  
-  }
-.react-calendar{
-  width: 300px;
-}
-.react-calendar__navigation__label{
-  width: 200px!important;
-}
 fieldset {
   display: grid !important;
   margin-inline-start: 2px !important;
-  margin-inline-end: 2px!important;
+  margin-inline-end: 2px !important;
   padding-block-start: 0.35em !important;
   padding-inline-start: 0.75em !important;
   padding-inline-end: 0.75em !important;
@@ -93,55 +49,217 @@ fieldset {
   border-color: rgb(192, 192, 192) !important;
   border-image: initial !important;
 }
-.react-calendar button{
-  border: 1 solid silver!important ;
-}
-.modal-header {
-  display: flex;
-  align-items: baseline !important;}
-.modal-body button{
-  margin-left: 4px;
-}
+
 .address {
   margin-top: 10px;
 }
-/* fieldset.address > label {
-  display: flex;
-  flex-direction: column;
-} */
-.erreur{
-  color:red;
+
+.erreur {
+  color: red;
 }
-form{
+form {
   display: flex;
   flex-direction: column;
 }
-.imgLogo{
+.imgLogo {
   width: 250px;
   height: 200px;
 }
-h2{
+h2 {
   color: #6e8511 !important;
 }
-.buttonSubmit{
-   width: 100px;
-   height: 35px;
-    margin-left: auto !important;;
-    margin-right: auto !important;;
-    margin-top: 20px!important;
-    background-color: #6e8511!important;
-    color: white !important;
-    border-radius: 10px!important;
-    border: none !important;
+.buttonSubmit {
+  width: 100px;
+  height: 35px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 20px !important;
+  background-color: #6e8511 !important;
+  color: white !important;
+  border-radius: 10px !important;
+  border: none !important;
+}
+
+input , #department,#state{
+  height: 30px
+}
+.erreurPage{
+  text-align: center;
+    font-size: 80px;
+    margin-top: 200px;
+}
+#employee-div h1{
+  text-align: center;
+}
+/* /////////////////////////style modal //////////////*/
+/* .modal {
+  background-color: #6e8511;
+  vertical-align: middle;
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+  box-sizing: border-box;
+  width: 90%;
+  background: #fff;
+  padding: 15px 30px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -o-border-radius: 8px;
+  -ms-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 0 10px #000;
+  -moz-box-shadow: 0 0 10px #000;
+  -o-box-shadow: 0 0 10px #000;
+  -ms-box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 10px #000;
+  text-align: left;
 }
 .modal-content {
-  margin-top: 400px!important; 
+  margin-top: 400px !important;
 }
 .modal-header {
-  border-bottom: none!important}
-  .modal-body button {
-    background-color: #6e8511!important;
-    border: none!important;
-    display: flex;
-    justify-content: space-evenly;
+  border-bottom: none !important;
+  display: flex;
+  align-items: baseline !important;
+}
+.modal-body button {
+  background-color: #6e8511 !important;
+  border: none !important;
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: 4px;
+
+}
+.modal-body {
+  display: flex;
+  flex-direction: row;
+}
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+/* ///////////////////////////////////////*/
+
+/* /////////////////////////style calendrier //////////////*/
+
+
+/* .jourNumber-actuel {
+  background-color: #6e8511;
+}
+button .jourNumber {
+  width: 29px !important;
+  height: 26px !important;
+}
+.jourNumber{
+  border: none;
+    background-color: white;
+}
+.daysNumber {
+  display: flex;
+}
+table{
+  border-collapse: collapse;
+  border: 2px solid #6e8511;
+    padding: 10px;
+    width: 100%;
+
+}
+
+tbody{
+  border: 2px solid #6e8511;
+}
+th,
+td {
+    border: 1px solid #6e8511;
+    padding: 8px;
+  
+} */
+/* ///////////////////////////////////////*/
+
+/* /////////////////////////style table //////////////*/
+/* th,
+td {
+    border: 1px solid #6e8511;
+    padding: 8px;
+  
+}
+table{
+  border-collapse: collapse;
+  border: 2px solid #6e8511;
+    padding: 10px;
+    width: 100%;
+
+}
+tbody{
+  border: 2px solid #6e8511;
+} */
+/* td[class^="streetemploye-"]
+{
+  padding: 5px !important;
+} */
+.tab-footer{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+.tab-footer button+button{
+  margin-left: 10px;
+}
+
+#employee-table tr {
+  height: 57px;
+}
+.tab-footer p {
+  margin-right: 100px;
+}
+
+@media (max-width:1090px){
+ 
+td ,th{
+  padding: 2px;
+   font-size: 10px; 
+}
+.container-flex{
+    width:500px
+    }
+}
+@media (max-width:847px){
+  .erreurPage{
+    font-size: 55px;
+    margin-top: 150px;
+}
+th{
+  padding: 1px!important;
+}
+/* table{
+  padding: 5px !important;
+} */
+/* td{
+  padding:3px!important
+} */
+/* td{
+  padding:4px;
+}
+th{
+  font-size:10px
+} */
+}
+@media(max-width:783px){
+  .container-flex{
+    width:500px
+    }
+}
+@media screen and (max-width: 600px) {
+  /* table {
+    overflow-x: auto; 
+    width:400px;
+  } */
+  .erreurPage{
+      font-size: 29px;
+      margin-top: 70px;
   }
+  
+}
