@@ -19,6 +19,7 @@
     "react-scripts": "5.0.1",
     "reactjs-id": "^1.0.6",
     "redux": "^4.2.1",
+    "slarabi-components": "^1.0.25",
     "styled-components": "^6.1.1",
     "web-vitals": "^2.1.0"
   },

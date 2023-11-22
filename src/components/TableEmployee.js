@@ -15,6 +15,9 @@ const StyledTable = styled.table`
     // padding: 5px;
     text-align: justify;
   }
+  th {
+    padding: 5px;
+  }
   td[class^='firstNameemploye-'],
   td[class^='lastNameemploye-'],
   td[class^='dateOfBirthemploye-'],
@@ -28,6 +31,14 @@ const StyledTable = styled.table`
 
   td[class^='streetemploye-'] {
     padding: 3px !important;
+    width: 200px;
+  }
+  td[class^='cityemploye-'],
+  td[class^='zipCodeemploye-'] {
+    width: 76px;
+  }
+  td[class^='dateOfBirthemploye-'] {
+    width: 130px;
   }
 `;
 const StyledBody = styled.tbody`

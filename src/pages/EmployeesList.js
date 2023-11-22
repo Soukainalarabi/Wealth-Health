@@ -11,7 +11,7 @@ export default function EmployeesList() {
   const [searchValue, setSearchValue] = useState('');
   const tableHead = {
     firstName: 'Nom',
-    lastName: 'Prenom',
+    lastName: 'Prénom',
     dateOfBirth: 'date naissance',
     startDate: 'Date début',
     street: 'Quartier',
@@ -96,16 +96,16 @@ export default function EmployeesList() {
       <TableEmployee data={currentEmployees} head={tableHead} />
       <div className="tab-footer">
         <p>
-          Showing 1 to
-          {employeeState.filteredEmployeesState.length}
-          of
-          {employeeState.employeState.length}
-          entries
+          
+          <span> Showing 1 to {employeeState.filteredEmployeesState.length}
+          </span>
+          <span>of {employeeState.employeState.length} entries</span>
+          
           {employeeState.filteredEmployeesState.length !==
-          employeeState.employeState.length
+            employeeState.employeState.length
             ? ` (filtered from 
-              ${employeeState.employeState.length}
-               total entries)`
+               ${employeeState.employeState.length}
+                total entries)`
             : ''}
         </p>
         <button type="button" onClick={prevPage}>

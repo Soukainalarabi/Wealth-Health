@@ -2,10 +2,11 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
+import { ModalSuccessPopup } from 'slarabi-components';
 import states from '../stateApi';
 import '../index.css';
 import Calendrier from '../components/Calendrier';
-import Modal from '../components/Modal';
+// import Modal from '../components/Modal';
 import SelectComponent from '../components/SelectComponent';
 import { modalSlice } from '../reducers/modal.reducer';
 import { employeSlice } from '../reducers/employe.reducer';
@@ -45,8 +46,8 @@ export default function Home() {
 
   // Retrieve employees from localStorage
   useEffect(() => {
-    const existingEmployees
-      = JSON.parse(localStorage.getItem('NewEmployee')) || []; // Initialize as an empty array
+    const existingEmployees =
+      JSON.parse(localStorage.getItem('NewEmployee')) || []; // Initialize as an empty array
 
     dispatch(employeSlice.actions.employe(existingEmployees));
   }, []);
@@ -54,13 +55,13 @@ export default function Home() {
   const submitForm = e => {
     e.preventDefault();
     if (
-      !firstNameInput.current.value
-      || !lastNameInput.current.value
-      || !dateOfBirthInput.current.value
-      || !startDateInput.current.value
-      || !streetInput.current.value
-      || !cityInput.current.value
-      || !zipCodeInput.current.value
+      !firstNameInput.current.value ||
+      !lastNameInput.current.value ||
+      !dateOfBirthInput.current.value ||
+      !startDateInput.current.value ||
+      !streetInput.current.value ||
+      !cityInput.current.value ||
+      !zipCodeInput.current.value
     ) {
       dispatch(modalSlice.actions.formError(true));
       return;
@@ -82,8 +83,8 @@ export default function Home() {
     // Check if the employee already exists
     const employeeExists = employeeState.employeState.some(
       emp =>
-        emp.firstName === newEmployee.firstName
-        && emp.lastName === newEmployee.lastName,
+        emp.firstName === newEmployee.firstName &&
+        emp.lastName === newEmployee.lastName,
     );
 
     if (!employeeExists) {
@@ -114,6 +115,11 @@ export default function Home() {
           ...prevState,
           birthdayDate: format(date, 'dd/MM/yyyy'),
         }));
+        // Close the date calendar for 'dateOfBirth'
+        setShowDate(prevShowDate => ({
+          ...prevShowDate,
+          birthCalendar: false,
+        }));
         console.log("L'âge est supérieur à", minAge);
       } else {
         console.log("L'âge est inférieur à", minAge);
@@ -124,6 +130,11 @@ export default function Home() {
       setSelectedDate(prevState => ({
         ...prevState,
         startDateState: format(date, 'dd/MM/yyyy'),
+      }));
+      // Close the date calendar for 'StartDate'
+      setShowDate(prevShowDate => ({
+        ...prevShowDate,
+        dateCalendar: false,
       }));
     }
   };
@@ -192,9 +203,9 @@ export default function Home() {
             id="department"
             optionSelected={departmentSelect}
           />
-          {modalState.isFormIncomplete
-          && !modalState.show
-          && !employeeState.existEmployeState ? (
+          {modalState.isFormIncomplete &&
+          !modalState.show &&
+          !employeeState.existEmployeState ? (
             <div className="erreur">Veuillez remplir le formulaire</div>
           ) : null}
           {employeeState.existEmployeState ? (
@@ -204,7 +215,7 @@ export default function Home() {
             Save
           </button>
         </form>
-        <Modal
+        <ModalSuccessPopup
           close={closeModal}
           redirection={allEmployee}
           show={modalState.show}
