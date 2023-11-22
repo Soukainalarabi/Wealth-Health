@@ -1,11 +1,12 @@
 <div align="center">
-  <img src="src/assets/logo.WebP" alt="Logo de Mon Projet" style=" border-radius: 50% ">
+  <img src="src/assets/logo.WebP" alt="Logo de Mon Projet" style=" width: 200px; ">
 
 
   [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
   [![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
   [![React](https://img.shields.io/badge/React-70DAFB?style=for-the-badge&logo=react&logoColor=blue)](https://reactjs.org/)
-  [![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)](https://redux.js.org/)
+  [![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-764ABC?style=for-the-badge&logo=redux&logoColor=white)](https://redux-toolkit.js.org/)
+
 
 </div>
 
