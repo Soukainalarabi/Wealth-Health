@@ -20,6 +20,7 @@ HRnet est une application web interne dédiée à la gestion des dossiers des em
 - JS
 - CSS
 - React
+- Redux Toolkit
 
 ## Contraintes Techniques
 
