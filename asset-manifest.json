@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Wealth-Health/static/css/main.290d9f07.css",
+    "main.js": "/Wealth-Health/static/js/main.f6b89370.js",
+    "static/media/logo.WebP": "/Wealth-Health/static/media/logo.51dac035559c174c01d1.WebP",
+    "index.html": "/Wealth-Health/index.html",
+    "main.290d9f07.css.map": "/Wealth-Health/static/css/main.290d9f07.css.map",
+    "main.f6b89370.js.map": "/Wealth-Health/static/js/main.f6b89370.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.290d9f07.css",
+    "static/js/main.f6b89370.js"
+  ]
+}
