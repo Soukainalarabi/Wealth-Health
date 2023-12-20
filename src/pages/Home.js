@@ -1,37 +1,36 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { format } from 'date-fns';
-import { ModalSuccessPopup } from 'slarabi-components';
-import states from '../stateApi';
-import '../index.css';
-import Calendrier from '../components/Calendrier';
+import React, { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { format } from "date-fns";
+import { ModalSuccessPopup } from "slarabi-components";
+import states from "../stateApi";
+import "../index.css";
+import Calendrier from "../components/Calendrier";
 // import Modal from '../components/Modal';
-import SelectComponent from '../components/SelectComponent';
-import { modalSlice } from '../reducers/modal.reducer';
-import { employeSlice } from '../reducers/employe.reducer';
-/* eslint-disable */
+import SelectComponent from "../components/SelectComponent";
+import { modalSlice } from "../reducers/modal.reducer";
+import { employeSlice } from "../reducers/employe.reducer";
 
 export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const modalState = useSelector(state => state.modal);
-  const employeeState = useSelector(state => state.employes);
+  const modalState = useSelector((state) => state.modal);
+  const employeeState = useSelector((state) => state.employes);
   const [showDate, setShowDate] = useState({
     birthCalendar: false,
     dateCalendar: false,
   });
   const [selectedDate, setSelectedDate] = useState({
-    birthdayDate: '',
-    startDateState: '',
+    birthdayDate: "",
+    startDateState: "",
   });
 
   const departements = [
-    'Sales',
-    'Marketing',
-    'Engineering',
-    'Human Resources',
-    'Legal',
+    "Sales",
+    "Marketing",
+    "Engineering",
+    "Human Resources",
+    "Legal",
   ];
   const firstNameInput = useRef();
   const lastNameInput = useRef();
@@ -47,12 +46,12 @@ export default function Home() {
   // Retrieve employees from localStorage
   useEffect(() => {
     const existingEmployees =
-      JSON.parse(localStorage.getItem('NewEmployee')) || []; // Initialize as an empty array
+      JSON.parse(localStorage.getItem("NewEmployee")) || []; // Initialize as an empty array
 
     dispatch(employeSlice.actions.employe(existingEmployees));
   }, []);
 
-  const submitForm = e => {
+  const submitForm = (e) => {
     e.preventDefault();
     if (
       !firstNameInput.current.value ||
@@ -67,7 +66,7 @@ export default function Home() {
       return;
     }
     dispatch(modalSlice.actions.formError(false));
-    startDateInput.current.value = format(currentDate, 'dd/MM/yyyy');
+    startDateInput.current.value = format(currentDate, "dd/MM/yyyy");
     const newEmployee = {
       firstName: firstNameInput.current.value,
       lastName: lastNameInput.current.value,
@@ -82,7 +81,7 @@ export default function Home() {
 
     // Check if the employee already exists
     const employeeExists = employeeState.employeState.some(
-      emp =>
+      (emp) =>
         emp.firstName === newEmployee.firstName &&
         emp.lastName === newEmployee.lastName,
     );
@@ -90,7 +89,7 @@ export default function Home() {
     if (!employeeExists) {
       // si l'employe n'a pas ete trouvé on le stock dans le loCal
       const updatedEmployees = [...employeeState.employeState, newEmployee];
-      localStorage.setItem('NewEmployee', JSON.stringify(updatedEmployees));
+      localStorage.setItem("NewEmployee", JSON.stringify(updatedEmployees));
       dispatch(employeSlice.actions.employe(updatedEmployees));
       dispatch(modalSlice.actions.showModal(true));
     } else {
@@ -99,7 +98,7 @@ export default function Home() {
   };
 
   const allEmployee = () => {
-    navigate('/employeesList');
+    navigate("/employeesList");
   };
 
   const closeModal = () => {
@@ -109,14 +108,14 @@ export default function Home() {
     const minAge = 20;
     const age = currentDate.getFullYear() - date.getFullYear();
 
-    if (type === 'dateOfBirth') {
+    if (type === "dateOfBirth") {
       if (age >= minAge) {
-        setSelectedDate(prevState => ({
+        setSelectedDate((prevState) => ({
           ...prevState,
-          birthdayDate: format(date, 'dd/MM/yyyy'),
+          birthdayDate: format(date, "dd/MM/yyyy"),
         }));
         // Close the date calendar for 'dateOfBirth'
-        setShowDate(prevShowDate => ({
+        setShowDate((prevShowDate) => ({
           ...prevShowDate,
           birthCalendar: false,
         }));
@@ -126,22 +125,22 @@ export default function Home() {
       }
     }
 
-    if (type === 'startDate') {
-      setSelectedDate(prevState => ({
+    if (type === "startDate") {
+      setSelectedDate((prevState) => ({
         ...prevState,
-        startDateState: format(date, 'dd/MM/yyyy'),
+        startDateState: format(date, "dd/MM/yyyy"),
       }));
       // Close the date calendar for 'StartDate'
-      setShowDate(prevShowDate => ({
+      setShowDate((prevShowDate) => ({
         ...prevShowDate,
         dateCalendar: false,
       }));
     }
   };
-  const toggleDateCalendar = type => {
+  const toggleDateCalendar = (type) => {
     setShowDate({
-      birthCalendar: type === 'birthCalendar',
-      dateCalendar: type === 'dateCalendar',
+      birthCalendar: type === "birthCalendar",
+      dateCalendar: type === "dateCalendar",
     });
   };
   return (
@@ -159,12 +158,14 @@ export default function Home() {
             id="date-of-birth"
             type="text"
             value={selectedDate.birthdayDate}
-            onChange={e => setSelectedDate.birthdayDate(e.target.value)}
-            onClick={() => toggleDateCalendar('birthCalendar')}
+            onChange={(e) => setSelectedDate.birthdayDate(e.target.value)}
+            onClick={() => toggleDateCalendar("birthCalendar")}
           />
           {showDate.birthCalendar && (
             <Calendrier
-              onButtonClick={date => handleButtonClickDate('dateOfBirth', date)}
+              onButtonClick={(date) =>
+                handleButtonClickDate("dateOfBirth", date)
+              }
             />
           )}
           <label>Start Date</label>
@@ -173,11 +174,11 @@ export default function Home() {
             id="start-date"
             type="text"
             defaultValue={selectedDate.startDateState}
-            onClick={() => toggleDateCalendar('dateCalendar')}
+            onClick={() => toggleDateCalendar("dateCalendar")}
           />
           {showDate.dateCalendar && (
             <Calendrier
-              onButtonClick={date => handleButtonClickDate('startDate', date)}
+              onButtonClick={(date) => handleButtonClickDate("startDate", date)}
             />
           )}
           <label>Adresse</label>

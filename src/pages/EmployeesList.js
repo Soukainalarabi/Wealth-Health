@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import TableEmployee from '../components/TableEmployee';
-import { employeSlice } from '../reducers/employe.reducer';
-/* eslint-disable */
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import TableEmployee from "../components/TableEmployee";
+import { employeSlice } from "../reducers/employe.reducer";
 
 export default function EmployeesList() {
-  const employeeState = useSelector(state => state.employes);
+  const employeeState = useSelector((state) => state.employes);
   const dispatch = useDispatch();
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const tableHead = {
-    firstName: 'Nom',
-    lastName: 'Prénom',
-    dateOfBirth: 'date naissance',
-    startDate: 'Date début',
-    street: 'Quartier',
-    city: 'Ville',
-    zipCode: 'Code postal',
-    stateValue: 'Pays',
-    departmentValue: 'Département',
+    firstName: "Nom",
+    lastName: "Prénom",
+    dateOfBirth: "date naissance",
+    startDate: "Date début",
+    street: "Quartier",
+    city: "Ville",
+    zipCode: "Code postal",
+    stateValue: "Pays",
+    departmentValue: "Département",
   };
 
   useEffect(() => {
-    const storedData = localStorage.getItem('NewEmployee');
+    const storedData = localStorage.getItem("NewEmployee");
 
     if (storedData) {
       const parsedData = JSON.parse(storedData);
@@ -36,7 +35,7 @@ export default function EmployeesList() {
   useEffect(() => {
     const searchValueLower = searchValue.toLowerCase();
     const filtered = employeeState.employeState.filter(
-      employee =>
+      (employee) =>
         employee.firstName.toLowerCase().includes(searchValueLower) ||
         employee.lastName.toLowerCase().includes(searchValueLower) ||
         employee.city.toLowerCase().includes(searchValueLower) ||
@@ -90,31 +89,32 @@ export default function EmployeesList() {
           type="search"
           id="search"
           value={searchValue}
-          onChange={e => setSearchValue(e.target.value)}
+          onChange={(e) => setSearchValue(e.target.value)}
         />
       </div>
       <TableEmployee data={currentEmployees} head={tableHead} />
       <div className="tab-footer">
         <p>
-          
-          <span> Showing 1 to {employeeState.filteredEmployeesState.length}
+          <span>
+            {" "}
+            Showing 1 to {employeeState.filteredEmployeesState.length}
           </span>
           <span>of {employeeState.employeState.length} entries</span>
-          
+
           {employeeState.filteredEmployeesState.length !==
-            employeeState.employeState.length
+          employeeState.employeState.length
             ? ` (filtered from 
                ${employeeState.employeState.length}
                 total entries)`
-            : ''}
+            : ""}
         </p>
         <button type="button" onClick={prevPage}>
-          {' '}
+          {" "}
           Previous
         </button>
         <button type="button">{employeeState.currentPageState}</button>
         <button type="button" onClick={nextPage}>
-          {' '}
+          {" "}
           Next
         </button>
       </div>

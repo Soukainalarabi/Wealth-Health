@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { ReactId } from 'reactjs-id';
+import React from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { ReactId } from "reactjs-id";
 
 const StyledTable = styled.table`
   border-collapse: collapse;
@@ -18,26 +18,26 @@ const StyledTable = styled.table`
   th {
     padding: 5px;
   }
-  td[class^='firstNameemploye-'],
-  td[class^='lastNameemploye-'],
-  td[class^='dateOfBirthemploye-'],
-  td[class^='startDateemploye-'],
-  td[class^='cityemploye-'],
-  td[class^='zipCodeemploye-'],
-  td[class^='stateValueemploye-'],
-  td[class^='departmentValueemploye-'] {
+  td[class^="firstNameemploye-"],
+  td[class^="lastNameemploye-"],
+  td[class^="dateOfBirthemploye-"],
+  td[class^="startDateemploye-"],
+  td[class^="cityemploye-"],
+  td[class^="zipCodeemploye-"],
+  td[class^="stateValueemploye-"],
+  td[class^="departmentValueemploye-"] {
     padding: 5px !important;
   }
 
-  td[class^='streetemploye-'] {
+  td[class^="streetemploye-"] {
     padding: 3px !important;
     width: 200px;
   }
-  td[class^='cityemploye-'],
-  td[class^='zipCodeemploye-'] {
+  td[class^="cityemploye-"],
+  td[class^="zipCodeemploye-"] {
     width: 76px;
   }
-  td[class^='dateOfBirthemploye-'] {
+  td[class^="dateOfBirthemploye-"] {
     width: 130px;
   }
 `;
@@ -62,7 +62,7 @@ export default function TableEmployee({ data, head }) {
         <StyledTable>
           <thead>
             <tr>
-              {keysA.map(key => (
+              {keysA.map((key) => (
                 <th key={key}>{head[key]}</th>
               ))}
             </tr>
@@ -70,7 +70,7 @@ export default function TableEmployee({ data, head }) {
           <StyledBody>
             {data.map((employee, id) => (
               <tr key={`employee-${ReactId()}`} className={`employee-${id}`}>
-                {keysA.map(val => (
+                {keysA.map((val) => (
                   <td key={`employe-${val}`} className={`${val}employe-${id}`}>
                     {employee[val]}
                   </td>
