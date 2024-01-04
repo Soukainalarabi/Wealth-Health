@@ -13,7 +13,6 @@ export default function App() {
           <Navigation />
           <Routes>
             <Route path="/" element={<Home />} />
-
             <Route path="/employeesList" element={<EmployeesList />} />
             <Route path="*" element={<Erreur />} />
           </Routes>

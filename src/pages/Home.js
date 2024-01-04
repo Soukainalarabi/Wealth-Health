@@ -1,30 +1,38 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { format } from "date-fns";
 import { ModalSuccessPopup } from "slarabi-components";
 import states from "../stateApi";
 import "../index.css";
 import Calendrier from "../components/Calendrier";
-// import Modal from '../components/Modal';
 import SelectComponent from "../components/SelectComponent";
 import { modalSlice } from "../reducers/modal.reducer";
 import { employeSlice } from "../reducers/employe.reducer";
 
 export default function Home() {
+  // Utilisation de react-router-dom pour la navigation
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // Sélection de l'état modal et de l'état des employés depuis Redux
   const modalState = useSelector((state) => state.modal);
   const employeeState = useSelector((state) => state.employes);
+
+  // Gestion des états liés à l'affichage des calendriers de date
   const [showDate, setShowDate] = useState({
     birthCalendar: false,
     dateCalendar: false,
   });
+
+  // Gestion des états des dates sélectionnées
   const [selectedDate, setSelectedDate] = useState({
     birthdayDate: "",
     startDateState: "",
   });
 
+  // Liste des départements
   const departements = [
     "Sales",
     "Marketing",
@@ -32,6 +40,8 @@ export default function Home() {
     "Human Resources",
     "Legal",
   ];
+
+  // Utilisation de useRef pour accéder aux champs de saisie
   const firstNameInput = useRef();
   const lastNameInput = useRef();
   const dateOfBirthInput = useRef();
@@ -43,16 +53,18 @@ export default function Home() {
   const zipCodeInput = useRef();
   const currentDate = new Date();
 
-  // Retrieve employees from localStorage
+  // Récupération des employés depuis le stockage local lors du chargement initial
   useEffect(() => {
     const existingEmployees =
-      JSON.parse(localStorage.getItem("NewEmployee")) || []; // Initialize as an empty array
-
+      JSON.parse(localStorage.getItem("NewEmployee")) || [];
     dispatch(employeSlice.actions.employe(existingEmployees));
-  }, []);
+  }, [dispatch]);
 
+  // Soumission du formulaire
   const submitForm = (e) => {
     e.preventDefault();
+
+    // Validation des champs du formulaire
     if (
       !firstNameInput.current.value ||
       !lastNameInput.current.value ||
@@ -65,8 +77,13 @@ export default function Home() {
       dispatch(modalSlice.actions.formError(true));
       return;
     }
+
     dispatch(modalSlice.actions.formError(false));
+
+    // Mise en forme de la date de début avec la date actuelle
     startDateInput.current.value = format(currentDate, "dd/MM/yyyy");
+
+    // Création d'un nouvel employé avec les données du formulaire
     const newEmployee = {
       firstName: firstNameInput.current.value,
       lastName: lastNameInput.current.value,
@@ -79,15 +96,15 @@ export default function Home() {
       departmentValue: departmentSelect.current.value,
     };
 
-    // Check if the employee already exists
+    // Vérification si l'employé existe déjà
     const employeeExists = employeeState.employeState.some(
       (emp) =>
         emp.firstName === newEmployee.firstName &&
-        emp.lastName === newEmployee.lastName,
+        emp.lastName === newEmployee.lastName
     );
 
     if (!employeeExists) {
-      // si l'employe n'a pas ete trouvé on le stock dans le loCal
+      // Stockage dans le localStorage et mise à jour de l'état des employés
       const updatedEmployees = [...employeeState.employeState, newEmployee];
       localStorage.setItem("NewEmployee", JSON.stringify(updatedEmployees));
       dispatch(employeSlice.actions.employe(updatedEmployees));
@@ -97,13 +114,17 @@ export default function Home() {
     }
   };
 
+  // Redirection vers la liste de tous les employés
   const allEmployee = () => {
     navigate("/employeesList");
   };
 
+  // Fermeture du modal
   const closeModal = () => {
     dispatch(modalSlice.actions.showModal(false));
   };
+
+  // Gestion du clic sur les boutons de date
   const handleButtonClickDate = (type, date) => {
     const minAge = 20;
     const age = currentDate.getFullYear() - date.getFullYear();
@@ -114,7 +135,6 @@ export default function Home() {
           ...prevState,
           birthdayDate: format(date, "dd/MM/yyyy"),
         }));
-        // Close the date calendar for 'dateOfBirth'
         setShowDate((prevShowDate) => ({
           ...prevShowDate,
           birthCalendar: false,
@@ -130,13 +150,14 @@ export default function Home() {
         ...prevState,
         startDateState: format(date, "dd/MM/yyyy"),
       }));
-      // Close the date calendar for 'StartDate'
       setShowDate((prevShowDate) => ({
         ...prevShowDate,
         dateCalendar: false,
       }));
     }
   };
+
+  // Affichage/masquage des calendriers de date
   const toggleDateCalendar = (type) => {
     setShowDate({
       birthCalendar: type === "birthCalendar",
@@ -146,7 +167,10 @@ export default function Home() {
   return (
     <div className="App">
       <div className="container">
-        <h2>Create Employee</h2>
+      <Link to="/employeesList" >
+        View current employes
+      </Link>
+        <h1>Create Employee</h1>
         <form onSubmit={submitForm}>
           <label>First Name</label>
           <input ref={firstNameInput} type="text" id="first-name" />

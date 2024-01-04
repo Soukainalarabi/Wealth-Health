@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { ReactId } from "reactjs-id";
@@ -12,8 +11,8 @@ const StyledTable = styled.table`
   th,
   td {
     border: 1px solid #6e8511;
-    // padding: 5px;
-    text-align: justify;
+    text-align: center;
+    // text-align: justify;
   }
   th {
     padding: 5px;
@@ -41,18 +40,25 @@ const StyledTable = styled.table`
     width: 130px;
   }
 `;
+const StyledH1=styled.h1`
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+`
+
 const StyledBody = styled.tbody`
   border: 2px solid #6e8511;
 `;
+
 export default function TableEmployee({ data, head }) {
   if (!data || data.length === 0) {
     return (
-      <div>
-        <h1>No employees found</h1>
-        <Link to="/">Home</Link>
-      </div>
+      <>
+        <StyledH1>No employees found</StyledH1>
+          </>
     );
   }
+
 
   const keysA = Object.keys(data[0]);
   return (
@@ -83,6 +89,7 @@ export default function TableEmployee({ data, head }) {
     </div>
   );
 }
+
 TableEmployee.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.number })),
   head: PropTypes.shape({
@@ -97,7 +104,8 @@ TableEmployee.propTypes = {
     departmentValue: PropTypes.string,
   }),
 };
+
 TableEmployee.defaultProps = {
   data: [],
-  head: [],
+  head: {},
 };

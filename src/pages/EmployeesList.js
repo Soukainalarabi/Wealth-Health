@@ -3,16 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TableEmployee from "../components/TableEmployee";
 import { employeSlice } from "../reducers/employe.reducer";
+import { modalSlice } from "../reducers/modal.reducer";
 
+// Composant principal pour la liste des employés
 export default function EmployeesList() {
+  // Utilisation de react-redux pour accéder à l'état global
   const employeeState = useSelector((state) => state.employes);
   const dispatch = useDispatch();
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState(""); // État local pour la valeur de recherche
+
+  // Fonction pour réinitialiser l'état au retour à la page d'accueil
+  const initialHome = () => {
+    dispatch(modalSlice.actions.showModal(false)); // Cacher le modal si visible
+    setSearchValue(""); // Réinitialiser la valeur de recherche
+  };
+
+  // Entêtes de tableau pour l'affichage des employés
   const tableHead = {
     firstName: "Nom",
     lastName: "Prénom",
-    dateOfBirth: "date naissance",
-    startDate: "Date début",
+    dateOfBirth: "Date de naissance",
+    startDate: "Date de début",
     street: "Quartier",
     city: "Ville",
     zipCode: "Code postal",
@@ -20,6 +31,7 @@ export default function EmployeesList() {
     departmentValue: "Département",
   };
 
+  // Effet useEffect pour récupérer les employés depuis le stockage local lors du chargement initial
   useEffect(() => {
     const storedData = localStorage.getItem("NewEmployee");
 
@@ -30,8 +42,9 @@ export default function EmployeesList() {
         dispatch(employeSlice.actions.filteredEmployees(parsedData));
       }
     }
-  }, []);
+  }, [dispatch]);
 
+  // Effet useEffect pour filtrer les employés en fonction de la valeur de recherche
   useEffect(() => {
     const searchValueLower = searchValue.toLowerCase();
     const filtered = employeeState.employeState.filter(
@@ -41,48 +54,45 @@ export default function EmployeesList() {
         employee.city.toLowerCase().includes(searchValueLower) ||
         employee.zipCode.toLowerCase().includes(searchValueLower) ||
         employee.stateValue.toLowerCase().includes(searchValueLower) ||
-        employee.departmentValue.toLowerCase().includes(searchValueLower),
+        employee.departmentValue.toLowerCase().includes(searchValueLower)
     );
 
     dispatch(employeSlice.actions.filteredEmployees(filtered));
-  }, [employeeState.employeState, searchValue]);
+  }, [employeeState.employeState, searchValue, dispatch]);
 
+  // Calcul des indices pour la pagination
   const indexOfLastEmployee =
     employeeState.currentPageState * employeeState.employeesPerPageState;
   const indexOfFirstEmployee =
     indexOfLastEmployee - employeeState.employeesPerPageState;
   const currentEmployees = employeeState.filteredEmployeesState.slice(
     indexOfFirstEmployee,
-    indexOfLastEmployee,
+    indexOfLastEmployee
   );
 
+  // Fonction pour passer à la page précédente
   const prevPage = () => {
     if (employeeState.currentPageState > 1) {
       dispatch(
-        employeSlice.actions.currentPage(employeeState.currentPageState - 1),
+        employeSlice.actions.currentPage(employeeState.currentPageState - 1)
       );
     }
   };
 
+  // Fonction pour passer à la page suivante
   const nextPage = () => {
     if (indexOfLastEmployee < employeeState.filteredEmployeesState.length) {
       dispatch(
-        employeSlice.actions.currentPage(employeeState.currentPageState + 1),
+        employeSlice.actions.currentPage(employeeState.currentPageState + 1)
       );
     }
   };
 
-  if (employeeState.employeState.length === 0) {
-    return (
-      <div className="container">
-        <h1>No employees found</h1>
-        <Link to="/">Home</Link>
-      </div>
-    );
-  }
-
   return (
     <div className="container-flex">
+      <Link to="/" onClick={initialHome}>
+        Create a new employee
+      </Link>
       <div className="input-search">
         <label>Search</label>
         <input
@@ -93,32 +103,35 @@ export default function EmployeesList() {
         />
       </div>
       <TableEmployee data={currentEmployees} head={tableHead} />
-      <div className="tab-footer">
-        <p>
-          <span>
-            {" "}
-            Showing 1 to {employeeState.filteredEmployeesState.length}
-          </span>
-          <span>of {employeeState.employeState.length} entries</span>
+      <>
+        {currentEmployees.length > 0 ? (
+          <div className="tab-footer">
+            <p>
+              <span>
+                {" "}
+                Showing 1 to {employeeState.filteredEmployeesState.length}
+              </span>
+              <span>of {employeeState.employeState.length} entries</span>
+              {employeeState.filteredEmployeesState.length !==
+                employeeState.employeState.length
+                ? ` (filtered from 
+             ${employeeState.employeState.length}
+              total entries)`
+                : ""}
+            </p>
+            <button type="button" onClick={prevPage}>
+              {" "}
+              Previous
+            </button>
+            <button type="button">{employeeState.currentPageState}</button>
+            <button type="button" onClick={nextPage}>
+              {" "}
+              Next
+            </button>
+          </div>
 
-          {employeeState.filteredEmployeesState.length !==
-          employeeState.employeState.length
-            ? ` (filtered from 
-               ${employeeState.employeState.length}
-                total entries)`
-            : ""}
-        </p>
-        <button type="button" onClick={prevPage}>
-          {" "}
-          Previous
-        </button>
-        <button type="button">{employeeState.currentPageState}</button>
-        <button type="button" onClick={nextPage}>
-          {" "}
-          Next
-        </button>
-      </div>
-      <Link to="/">Home</Link>
+        ) : null}
+      </>
     </div>
   );
 }

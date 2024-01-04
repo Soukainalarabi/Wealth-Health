@@ -74,4 +74,4 @@ Le site est actuellement déployé sur GitHub Pages. Vous pouvez y accéder en s
 
 La réalisation des tests de performance pour garantir une expérience utilisateur optimale. Vous pouvez consulter le rapport complet des tests pour obtenir des détails spécifiques :
 
-- **Rapport de Performance :** [Lien vers le Rapport](https://www.pdffiller.com/jsfiller-desk12/?isShareViaLink=1&lang=fr&projectId=1394893565&loader=tips&MEDIUM_PDFJS=true&PAGE_REARRANGE_V2_MVP=true&richTextFormatting=true&isPageRearrangeV2MVP=true&jsf-page-rearrange-v2=true&jsf-new-header=false&jsf-document-scroll-zoom=true&jsf-redesign-full=false&routeId=ed11ed968baa33e6f096c57a4ffd5646#043971d1ffc142188c68daba12dba1ed)
+- **Rapport de Performance :** [Lien vers le Rapport](https://pdf.ac/3aq3aJ)

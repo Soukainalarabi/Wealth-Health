@@ -6,6 +6,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+a{
+  text-decoration: none;
+    color: black;
+    font-weight: 800;
+}
 .title {
   display: flex;
   align-items: center;
@@ -65,8 +70,11 @@ form {
   width: 250px;
   height: 200px;
 }
-h2 {
-  color: #6e8511 !important;
+h1 ,.erreurPage h2{
+  color: #6e8511 ;
+}
+.erreurPage h1 {
+  color: black!important;
 }
 .buttonSubmit {
   width: 100px;
@@ -85,8 +93,8 @@ input , #department,#state{
 }
 .erreurPage{
   text-align: center;
-    font-size: 80px;
-    margin-top: 200px;
+    font-size: 70px;
+    /* margin-top: 200px; */
 }
 #employee-div h1{
   text-align: center;
