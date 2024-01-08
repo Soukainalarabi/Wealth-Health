@@ -74,4 +74,4 @@ Le site est actuellement déployé sur GitHub Pages. Vous pouvez y accéder en s
 
 La réalisation des tests de performance pour garantir une expérience utilisateur optimale. Vous pouvez consulter le rapport complet des tests pour obtenir des détails spécifiques :
 
-- **Rapport de Performance :** [Lien vers le Rapport](https://pdf.ac/3aq3aJ)
+- **Rapport de Performance :** [Lien vers le Rapport](https://pdf.ac/2E44Hi)
