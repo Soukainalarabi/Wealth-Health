@@ -99,8 +99,8 @@ export default function Home() {
     // Vérification si l'employé existe déjà
     const employeeExists = employeeState.employeState.some(
       (emp) =>
-        emp.firstName === newEmployee.firstName &&
-        emp.lastName === newEmployee.lastName
+        emp.firstName.toLowerCase() === newEmployee.firstName.toLowerCase() &&
+        emp.lastName.toLowerCase() === newEmployee.lastName.toLowerCase()
     );
 
     if (!employeeExists) {
