@@ -33,7 +33,6 @@ export default function Calendrier({ onButtonClick }) {
   const date = new Date();
   const [mois, setMois] = useState(date.getMonth());
   const [annee, setAnnee] = useState(date.getFullYear());
-
   const jour = date.getDate();
   const moisNames = [
     'Janvier',
@@ -49,21 +48,28 @@ export default function Calendrier({ onButtonClick }) {
     'Novembre',
     'Décembre',
   ];
+  // firstDay:stocke le jour de la semaine du premier jour du mois en cours.
   const firstDay = new Date(annee, mois, 1).getDay();
+  //lastDay:stocke le dernier jour du mois en cours
   const lastDay = new Date(annee, mois + 1, 0).getDate();
-
+  // Utilisation de useMemo pour calculer les jours dans le mois de manière efficace
   const joursDansMois = useMemo(() => {
+    // Créer un tableau de jours vides pour les jours précédant le premier jour du mois.
     const joursPrecedents = Array.from({ length: firstDay }, () => null);
+    // Crée un tableau de jours actuels en utilisant la longueur du dernier jour du mois.
     const joursCourants = Array.from(
       { length: lastDay },
       (_, index) => index + 1,
     );
+    // Combine les jours précédents et les jours actuels pour obtenir tous les jours dans le mois.
+
     return [...joursPrecedents, ...joursCourants];
   }, [firstDay, lastDay]);
+  // la date actuelle (mois et année).
   const dateAujourdui = `${moisNames[mois]} ${annee}`;
 
   const handleMoisPrecedent = () => {
-    const nouveauMois = (mois - 1 + 12) % 12;
+    const nouveauMois = (mois - 1 + 12) % 12;//0 janvier
     setMois(nouveauMois);
   };
 
@@ -83,7 +89,7 @@ export default function Calendrier({ onButtonClick }) {
   };
 
   const handleButtonClick = jourDuMois => {
-    const formattedDate = `${mois + 1}/${jourDuMois}/${annee}`;
+    const formattedDate = `${mois + 1}/${jourDuMois}/${annee}`; // formater la date selectionner sous la forme "mois/jour/année".
     onButtonClick(new Date(formattedDate));
   };
 
@@ -149,12 +155,10 @@ export default function Calendrier({ onButtonClick }) {
                 .slice(rowIndex * 7, (rowIndex + 1) * 7)
                 .map((jourDuMois, index) => (
                   <td
-                    key={`jour${
-                      jourDuMois !== null ? jourDuMois : `null${index}`
-                    }`}
-                    className={`jour${
-                      jourDuMois !== null ? jourDuMois : `null${index}`
-                    }`}
+                    key={`jour${jourDuMois !== null ? jourDuMois : `null${index}`
+                      }`}
+                    className={`jour${jourDuMois !== null ? jourDuMois : `null${index}`
+                      }`}
                   >
                     {jourDuMois !== null ? (
                       <StyledButton
@@ -182,5 +186,5 @@ Calendrier.propTypes = {
   onButtonClick: PropTypes.func,
 };
 Calendrier.defaultProps = {
-  onButtonClick: () => {},
+  onButtonClick: () => { },
 };

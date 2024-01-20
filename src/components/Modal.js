@@ -56,6 +56,7 @@ const ModalBody = styled.div`
 // Define the Modal component
 
 export default function Modal({ close, redirection, show, erreur }) {
+    // Vérifie si le modal doit être affiché et s'il n'y a pas d'erreur
   return show && !erreur ? (
     <CenteredModal className="centered">
       <StyledModal className="modal">

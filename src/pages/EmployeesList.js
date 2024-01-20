@@ -15,6 +15,8 @@ export default function EmployeesList() {
   // Fonction pour réinitialiser l'état au retour à la page d'accueil
   const initialHome = () => {
     dispatch(modalSlice.actions.showModal(false)); // Cacher le modal si visible
+    dispatch(modalSlice.actions.formError(false)); // Cacher le modal si visible
+    dispatch(employeSlice.actions.existEmploye(false))
     setSearchValue(""); // Réinitialiser la valeur de recherche
   };
 
@@ -31,7 +33,7 @@ export default function EmployeesList() {
     departmentValue: "Département",
   };
 
-  // Effet useEffect pour récupérer les employés depuis le stockage local lors du chargement initial
+  // useEffect pour récupérer les employés depuis le stockage local lors du chargement initial
   useEffect(() => {
     const storedData = localStorage.getItem("NewEmployee");
 
@@ -44,7 +46,7 @@ export default function EmployeesList() {
     }
   }, [dispatch]);
 
-  // Effet useEffect pour filtrer les employés en fonction de la valeur de recherche
+  // useEffect pour filtrer les employés en fonction de la valeur de recherche
   useEffect(() => {
     const searchValueLower = searchValue.toLowerCase();
     const filtered = employeeState.employeState.filter(

@@ -51,6 +51,7 @@ const StyledBody = styled.tbody`
 `;
 
 export default function TableEmployee({ data, head }) {
+    // Si aucune donnée existe ou si le tableau est vide
   if (!data || data.length === 0) {
     return (
       <>
@@ -59,6 +60,7 @@ export default function TableEmployee({ data, head }) {
     );
   }
 
+  // Récupération des clés (colonnes) à partir de la première entrée de données
 
   const keysA = Object.keys(data[0]);
   return (
@@ -75,6 +77,7 @@ export default function TableEmployee({ data, head }) {
           </thead>
           <StyledBody>
             {data.map((employee, id) => (
+              //ReactId() est utilisé pour créer une clé unique pour chaque ligne dans le tableau. 
               <tr key={`employee-${ReactId()}`} className={`employee-${id}`}>
                 {keysA.map((val) => (
                   <td key={`employe-${val}`} className={`${val}employe-${id}`}>
